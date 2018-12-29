@@ -71,6 +71,10 @@ body .bg {
 	font-weight: 400;
 	border-radius: 0;
 }
+.ui.tiny.modal.register>.content {
+	background: #1d1c3a;
+}
+
 .ui.tiny.modal.register .label {
 	color: white;
 	font-weight: 400;
@@ -112,18 +116,18 @@ h2.ui.header {
 .ui.menu.tabular.menu .item.active{
 	text-shadow: 0 0 5px #02E5D1, 0 0 20px #4391FD, 0 0 10px #4391FD;
 }
-.tiny.ui.modal.notTheTime {
+.tiny.ui.modal {
 	background:#21203f;
 }
-.ui.tiny.modal.notTheTime .header {
+.ui.tiny.modal .header {
 	background: #21203f;
 	color: white;
 }
-.tiny.ui.modal.notTheTime .content {
+.tiny.ui.modal .content {
 	background: #1d1c3a;
 	color: #caccf7;
 }
-.tiny.ui.modal.notTheTime .actions {
+.tiny.ui.modal .actions {
 	background: #21203f;
 }
 @media only screen and (max-width: 320px) {

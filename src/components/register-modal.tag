@@ -6,7 +6,7 @@
 		<div class="header" data-translate="register">신규가입</div>
 		<i class="close icon"></i>
 		<div class="content">
-			<form class="ui form register-form">
+			<form class="ui form register-form" ref="form">
 				<div class="field">
 					<label class="label" data-translate="eth_address">ETH 주소</label>
 					<input type="text" name="address" disabled value={ address } autocomplete="off">
@@ -67,26 +67,29 @@
 					identifier:'InvitationVode',
 					rules:[{
 						type:'regExp[/^0x.{40}$/]',
-						prompt:'邀请人地址格式错误！'
+						prompt:function(){
+							return $.i18n.map.invitecode_formate_error
+						}
 					}]
 				}
 			},
 			onSuccess:function(e){
 				e.preventDefault()
-				_this.loadingText = '正在验证邀请码有效性...'
+				_this.loadingText = $.i18n.map.validate_invitecode
+				console.log($.i18n.map.validate_invitecode)
 				_this.update()
 				$('.modal.register .ui.dimmer').addClass('active')
 				Interface.Bridges.Metamask.contracts.LuckyStar.read('isInvitationVode',[_this.inviteCode]).then(function(isinviteCodeValid){
 					if(!isinviteCodeValid){
-						alert('邀请码无效！')
+						alert($.i18n.map.invalid_code)
 						$('.modal.register .ui.dimmer').removeClass('active')
 						return
 					}
-					_this.loadingText = '请确认注册...'
+					_this.loadingText = $.i18n.map.confirm_register
 					_this.update()
 					$('.modal.register .ui.dimmer').addClass('active')
 					Interface.Bridges.Metamask.contracts.LuckyStar.write('register',[_this.inviteCode]).then(function(){
-						_this.loadingText = '等待注册成功...'
+						_this.loadingText = $.i18n.map.wait_for_register
 						_this.update()
 						_this.detectRegisterSuccess()
 					},function(){
@@ -98,6 +101,7 @@
 				
 			}
 		})
+		
 	})
 </script>
 <style>

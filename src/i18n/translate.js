@@ -1,4 +1,4 @@
-var languageTemp = 'kr'
+var languageTemp = ''
 
 function i18n(lang){
     languageTemp = lang

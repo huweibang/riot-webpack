@@ -37,10 +37,10 @@
 									
 								</div>
 								<div class="user-control">		
-									<custom-button onclick={ register_handle } if={ signedIn && !isRegistered }>
+									<custom-button onclick={ register_handle } if={ signedIn && isRegistered === false }>
 										<span data-translate="register"></span>
 									</custom-button>
-									<div class="registered" if={ signedIn && isRegistered }>
+									<div class="registered" if={ signedIn && isRegistered === true }>
 										<i class="check circle outline icon large"></i>
 										<div>{ $.i18n.map.registered }</div>
 									</div>
@@ -64,7 +64,7 @@
 				_this.translate = require('../i18n/translate.js')
 				_this.logo = require("../imgs/logo.png")
 				_this.signedIn = Interface.Bridges.Metamask?Interface.Bridges.Metamask.signedIn:false
-				_this.isRegistered = false
+				_this.isRegistered = undefined
 				// 事件
 				_this.register_handle = function(){
 					if(Interface.Bridges.Metamask.signedIn){
@@ -116,8 +116,11 @@
 					
 					$(_this.refs.nationality).dropdown({
 						on:'click',
-						onChange:function(){
-							Interface.UI.trigger('translate')
+						onChange:function(value){
+							if(Interface.UI.language!==value){
+								Interface.UI.trigger('translate')
+
+							}			
 						}
 					}).dropdown('set selected','kr')
 

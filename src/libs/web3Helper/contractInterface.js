@@ -10,7 +10,7 @@
          */
 
          const Interface = {
-            UI: new (function () { riot.observable(this);this.language = 'kr' })(),
+            UI: new (function () { riot.observable(this);this.language = '' })(),
             Bridges: [],
             Cache: {},
             TimeDifference: false,

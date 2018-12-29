@@ -4,8 +4,17 @@ import 'riot-hot-reload'
 import '../semantic/dist/semantic.min.css'
 import './css/index.css'
 import '../semantic/dist/semantic.min.js'
-import './views/home.tag'
+import './views/home/home.tag'
+import './views/home/fallback.tag'
+import './views/home/count.tag'
+import './views/home/invite-friend.tag'
+import './views/home/shikai.tag'
+import './views/home/liangkai.tag'
+import './views/home/purchas.tag'
+import './views/home/record.tag'
+import './views/home/round.tag'
 import './components/header.tag'
+import './components/custom-button.tag'
 import './components/null.tag'
 import './components/register-modal.tag'
 import './components/pendingLine.tag'
@@ -60,13 +69,17 @@ $(async function(){
 	})
 	if(!Interface.Bridges.Metamask){
 		$('.envError .content').text('No metamask or trustwallet detected!')
-		$('.envError.ui.tiny.modal').modal('show')
+		$('.envError.ui.tiny.modal').modal({
+			closable:false
+		}).modal('show')
 		return
 	}
 	var isNet = await Interface.checkNetwork()
 	if(!isNet){
 		$('.envError .content').text('You\'re not on the right network!')
-		$('.envError.ui.tiny.modal').modal('show')
+		$('.envError.ui.tiny.modal').modal({
+			closable:false
+		}).modal('show')
 		return
 	}
 	await Interface.Bridges.Websocket.contracts.LuckyStar.listen()
