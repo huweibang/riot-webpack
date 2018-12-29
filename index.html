@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lucky Stars</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta charset="utf-8">
+	<style>
+	.fullscreen-loader {
+		position: fixed;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		z-index: 100;
+		background: #21203f;
+	}
+	.fullscreen-loader .loading-tips {
+		position: absolute;
+		left: 50%;
+		top: 140px;
+		transform: translateX(-50%);
+		color: white;
+		font-size: 42px;
+		font-family:PingFangSC-Regular,PingFang SC, NotoSansHans-Regular,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Arial,sans-serif;
+		line-height: 1;
+		transition: 1s linear text-shadow;
+	}
+</style>
+</head>
+<body>
+	<div class="bg"></div>
+	<div class="fullscreen-loader">
+		<div class="loading-tips gracefulText">Loading...</div>
+	</div>
+	<div class="ui modal tiny envError">
+		<div class="header">Warning</div>
+		<div class="content">
+			<p>No metamask or trustwallet detected!</p>
+		</div>
+	</div>
+	<module-main></module-main>
+	<module-header></module-header>
+	<module-alert></module-alert>
+	<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script>
+</body>
+</html>

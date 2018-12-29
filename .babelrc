@@ -1,0 +1,16 @@
+{
+"presets": [
+    [
+      "@babel/preset-env",
+      {
+      	"modules": false,
+        "targets":[
+        	"ios_saf 10",
+        	"last 2 versions",
+        	"not dead",
+        ]
+      }
+    ]
+],
+"plugins": ["@babel/plugin-syntax-async-generators"]
+}

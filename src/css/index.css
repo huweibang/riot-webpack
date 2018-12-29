@@ -1,0 +1,152 @@
+input[type=number] {
+	-moz-appearance:textfield;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+html,body {
+	height: 100%;
+}
+body {
+	
+}
+body .bg {
+	background: url('../imgs/bg.png') no-repeat center -3rem,linear-gradient(to right, #22204d 0%,#222158 50%,#25216c 100%);
+	background-size: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -1;
+}
+.ui.attached.segment.tab{
+	background: #21203f;
+	color: white;
+	border: 1px solid #21203f;
+}
+.ui.menu.tabular.menu .item {
+	border: none;
+	color: white;
+}
+.ui.menu.tabular.menu .item.active {
+	background: #21203f;
+	color: white;
+	box-shadow: 0px 0px 20px 0 #21203f;
+}
+.ui.tabular.menu {
+	border-bottom: none;
+	color: white;
+}
+.ui.menu.tabular.menu .item:first-child {
+	border-top-left-radius: 4px;
+}
+.header.ui{
+	color: white;
+	font-weight: 100;
+	line-height: 2em;
+	font-size: 1.25rem;
+	margin-top: 0;
+}
+.question.circle.outline.icon {
+	float: right;
+	font-weight: 100;
+	font-size: 1.25rem;
+	line-height: 1;
+	margin-top: 0.7em;
+	margin-right: 0;
+	color: #ff8031;
+	cursor: pointer;
+	vertical-align: middle;
+}
+.gracefulText {
+	text-shadow: 0 0 5px #02E5D1, 0 0 20px #4391FD, 0 0 10px #4391FD;
+}
+.ui.tiny.modal.register>.header,.ui.tiny.modal.register>.content{
+	background: #21203f;
+	border-color: #21203f;
+	color: white;
+	font-weight: 400;
+	border-radius: 0;
+}
+.ui.tiny.modal.register .label {
+	color: white;
+	font-weight: 400;
+}
+.ui.tiny.modal.register {
+	border: none;
+	border-radius: 0;
+}
+.ui.form .field .prompt.label {
+	font-weight: 400;
+	border: none!important;
+}
+.ui.form .field .prompt.label::before {
+	border: none!important;
+	margin-top: 0;
+}
+.ui.form input:not([type]):focus, .ui.form input[type="date"]:focus, .ui.form input[type="datetime-local"]:focus, .ui.form input[type="email"]:focus, .ui.form input[type="file"]:focus, .ui.form input[type="number"]:focus, .ui.form input[type="password"]:focus, .ui.form input[type="search"]:focus, .ui.form input[type="tel"]:focus, .ui.form input[type="text"]:focus, .ui.form input[type="time"]:focus, .ui.form input[type="url"]:focus {
+	border-color: #02e4d1;
+}
+.ui.basic.modal .content {
+	text-align: left;
+}
+.ui.basic.modal .actions {
+	text-align: center;
+}
+.ui.modal > .close {
+	top: .5rem;
+	right: .5rem;
+}
+h2.ui.header {
+	font-size: 1.5rem;
+}
+.ui.attached.tabular.menu [data-tab]{
+	max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ui.menu.tabular.menu .item.active{
+	text-shadow: 0 0 5px #02E5D1, 0 0 20px #4391FD, 0 0 10px #4391FD;
+}
+.tiny.ui.modal.notTheTime {
+	background:#21203f;
+}
+.ui.tiny.modal.notTheTime .header {
+	background: #21203f;
+	color: white;
+}
+.tiny.ui.modal.notTheTime .content {
+	background: #1d1c3a;
+	color: #caccf7;
+}
+.tiny.ui.modal.notTheTime .actions {
+	background: #21203f;
+}
+@media only screen and (max-width: 320px) {
+	body .bg {
+		background-size: 300%;
+		background-position: center 3rem;
+	}
+}
+@media only screen and (min-width: 321px) and (max-width: 767px) {
+	body .bg {
+		background-size: 200%;
+		background-position: center 3rem;
+	}
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	body .bg {
+		background-size: 150%;
+		background-position: center 3rem;
+	}
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	body .bg {
+		background-size: 150%;
+		background-position: center -3rem;
+	}
+}
