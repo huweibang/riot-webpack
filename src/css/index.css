@@ -108,7 +108,7 @@ h2.ui.header {
 	font-size: 1.5rem;
 }
 .ui.attached.tabular.menu [data-tab]{
-	max-width: 40%;
+	max-width: 33.3%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -126,6 +126,9 @@ h2.ui.header {
 .tiny.ui.modal .content {
 	background: #1d1c3a;
 	color: #caccf7;
+}
+.tiny.ui.modal .content input {
+	border-color: #02e4d1;
 }
 .tiny.ui.modal .actions {
 	background: #21203f;

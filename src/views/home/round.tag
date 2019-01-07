@@ -1,7 +1,7 @@
 //轮次子页面
 
 <round>
-	<h2 class="ui header"><span>{ currentRoundEx() }</span><!-- <i class="question circle outline icon"></i> --></h2>
+	<h2 class="ui header"><span>{ currentRoundEx() }</span><i class="question circle outline icon"></i></h2>
 	<div class="bordergroup one"></div>
 	<div class="bordergroup two"></div>
 	<h1 class="ui header" data-translate="countdown_leaves">剩余倒计时</h1>
@@ -12,32 +12,74 @@
 		<div class="eight wide computer eight wide tablet six wide mobile column left aligned" data-translate="pool_rounds_amount">奖池当前总量</div>
 		<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">
 			<p style="white-space: nowrap;margin-bottom: 0;">
-				<span class="reward">0.00000</span>
+				<span class="reward">{ poolWhole.toFixed(5) }</span>
 				<i class="icon ethereum large"></i>
 			</p>
 			<p class="sub">
-				≈ 0 USDT
+				≈ { (poolWhole.multipliedBy(USDRoit)).toFixed(2) } USDT
 			</p>
+		</div>
+	</div>
+	<div class="ui basic modal round">
+		<div class="ui icon header" data-translate="current_round">
+			轮次
+		</div>
+		<div class="content">
+			<p data-translate="round_question_1"></p>
+			<p data-translate="round_question_2"></p>
+		</div>
+		<div class="actions">
+			<div class="ui green ok inverted button">
+				<i class="checkmark icon"></i>
+				<span data-translate="ok"></span>
+			</div>
 		</div>
 	</div>
 	<script>
 		var _this = this
+		var BN = require('bignumber.js')
+		var Promise = require('bluebird')
+		_this.mixin('BNMix')
 	// 属性
 	_this.currentRound = 1
-	
-
+	_this.poolWhole = BN(0)
+	_this.USDRoit = 0
+	$.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD',function(data){
+		_this.USDRoit = data.USD
+	})
 	// 事件
-
+	Interface.UI.on('currentRoundInfo',function(currentRoundInfo){
+		_this.poolWhole = currentRoundInfo.poolWhole.dividedBy(1e18)
+		_this.currentRound = currentRoundInfo.rID.toNumber()
+	})
 	// 方法
 	_this.currentRoundEx = function(){
-		return $.i18n.map['round']?$.i18n.map['round'].replace('{0}',_this.currentRound):''
+		return $.i18n.map['round']?$.i18n.map['round'].replace('{0}',_this.currentRound):"제"+ _this.currentRound +"회"
 	}
-
+	_this.updateCountdown = function(){
+		Interface.Bridges.Metamask.contracts.LuckyStars.read('getTimeLeft').then(function(data){
+			$('div#countdown,span#countdown-shikai,.countdown-small').countdown(new Date().setSeconds(new Date().getSeconds()+data.toNumber())).countdown('start')
+		},function(){
+			
+		})
+	}
 	// 生命周期
 	this.on('mount',function(){
-		// $('div#countdown').countdown(new Date().setHours(new Date().getHours()+6),function(e){
-		// 	$(this).html(e.strftime('%H:%M:%S'));
-		// })
+
+		$('round .question.circle.outline.icon').click(function(){
+			$('.round.ui.basic.modal').modal('show')
+		})
+		$('div#countdown,span#countdown-shikai,.countdown-small').countdown(new Date().setHours(new Date().getHours() + 6),function(e){
+			$(this).html(e.strftime('%H:%M:%S'));
+		}).countdown('stop')
+		_this.updateCountdown()
+		setInterval(_this.updateCountdown,30000)
+		Interface.Bridges.Metamask.contracts.LuckyStars.read('rID_').then(function(data){
+			_this.currentRound = data.toNumber()
+			_this.update()
+		},function(err){
+			alert('get current round fail！')
+		})
 	})
 </script>
 <style>

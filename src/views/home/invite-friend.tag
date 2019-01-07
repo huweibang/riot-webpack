@@ -6,26 +6,40 @@
 				<span data-translate="invite_link">邀请链接：</span><br />{ shareLink() }
 			</div>
 			<div class="six wide computer six wide tablet six wide mobile column share-button-wrapper right aligned">
+				<div class="whole-wrapper">
+					<i class="question circle outline icon"></i><br />
 				<custom-button><span data-translate="share">分享</span></custom-button>
+				</div>
+				
 			</div>
 		</div>
 	</div>
 	<h4 class="ui header" data-translate="invite_fund">초대 리워드</h4>
-	<div class="ui grid invite-reward-list">
-		<div class="row">
-			<div class="six wide computer six wide tablet sixteen wide mobile column">
-				<span data-translate="friends_one">一级好友:</span>{ friendListOne }
-			</div>
-			<div class="ten wide computer ten wide tablet sixteen wide mobile column right aligned">
-				<span data-translate="prompt_fund">추천인 리워드：</span>0.00000ETH
-			</div>
+	<div class="invite-reward-list">
+		<div class="ui grid">
+			<div class="row" each={ value,i in friendsMap }>
+				<div class="six wide computer six wide tablet sixteen wide mobile column">
+					<span data-translate={ "friends_" + (i + 1) }>{ $.i18n.map["friends_" + (i + 1)] }</span>{  friendsMap[i].toNumber() }
+				</div>
+				<div class="ten wide computer ten wide tablet sixteen wide mobile column right aligned">
+					<span data-translate="prompt_fund">추천인 리워드：</span>0.00000ETH
+				</div>
+			</div>	
+		</div>	
+	</div>
+	<div class="ui basic modal invite-friend">
+		<div class="ui icon header" data-translate="invite_friends">
+			邀请好友
 		</div>
-		<div class="row">
-			<div class="six wide computer six wide tablet sixteen wide mobile column">
-				<span data-translate="friends_two">二级好友：</span>{ friendListTwo }
-			</div>
-			<div class="ten wide computer ten wide tablet sixteen wide mobile column right aligned">
-				<span data-translate="prompt_fund">推荐奖励：</span>0.00000ETH
+		<div class="content">
+			<p data-translate="invite_friend_question_1"></p>
+			<p data-translate="invite_friend_question_2"></p>
+			<p data-translate="invite_friend_question_3"></p>
+		</div>
+		<div class="actions">
+			<div class="ui green ok inverted button">
+				<i class="checkmark icon"></i>
+				<span data-translate="ok"></span>
 			</div>
 		</div>
 	</div>
@@ -37,12 +51,12 @@
 	.ui.header {
 		color: white;
 	}
-	.ui.grid.invite-reward-list {
+	.invite-reward-list {
 		background: #1d1c3a;
-		margin-left: 0;
-		margin-right: 0;
-		padding-top: 1rem;
-		padding-bottom: 1rem;
+		padding: 1rem;
+		height: 20rem;
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 	.invite-reward-list .row {
 		margin-bottom: 1rem;
@@ -62,12 +76,13 @@
 </style>
 <script>
 	var _this = this
+	var Promise = require('bluebird')
+	_this.$ = $
 	_this.clipboard = null
-	_this.friendListOne = 0
-	_this.friendListTwo = 0
+	_this.friendsMap = []
 	_this.shareLink = function(){
 		if(Interface.Bridges.Metamask && Interface.Bridges.Metamask._lastWallet){
-			return `https://luckystars.folengame.com/?inviteCode=${Interface.Bridges.Metamask._lastWallet}`
+			return 'https://luckystars.folengame.com/?inviteCode='+Interface.Bridges.Metamask._lastWallet
 		}else {
 			return 'https://luckystars.folengame.com'
 		}
@@ -76,25 +91,28 @@
 		alert('您的专属邀请链接已复制！')
 	}
 	_this.getFriendsMap =function(){
-		Interface.Bridges.Metamask.contracts.LuckyStar.read('getNumberOfInvited',Interface.Bridges.Metamask._lastWallet).then(function(friendsMap){
-			_this.friendListOne = friendsMap[0].toNumber()
-			_this.friendListTwo = friendsMap[1].toNumber()
+		Interface.Bridges.Metamask.contracts.Register.read('getNumberOfInvited',Interface.Bridges.Metamask._lastWallet).then(function(friendsMap){
+			friendsMap.length = friendsMap[0].toNumber()
+			_this.friendsMap = friendsMap
 			_this.update()
 		},function(error){})
 		
 	}
 	Interface.Bridges.Metamask && Interface.Bridges.Metamask.on('account.signedIn',function(){
 		_this.clipboard = new ClipboardJS('invite-friend .share-button-wrapper .custom-button', {
-    		text:_this.shareLink
+			text:_this.shareLink
 		})
 		_this.update()
 		_this.getFriendsMap()
 	})
 	this.on('mount',function(){
 		_this.clipboard = new ClipboardJS('invite-friend .share-button-wrapper .custom-button', {
-    		text:_this.shareLink
+			text:_this.shareLink
 		})
 		_this.clipboard.on('success',_this.copySuccessCb)
+		$('invite-friend .question.circle.outline.icon').click(function(){
+			$('.invite-friend.ui.basic.modal').modal('show')
+		})
 		if(Interface.Bridges.Metamask && Interface.Bridges.Metamask.signedIn){
 			_this.getFriendsMap()
 		}

@@ -12,7 +12,7 @@
 					<i class="icon stopwatch big"></i>
 				</p>
 				<p style="white-space: nowrap">
-					<span data-translate="pool_leaves">상금풀 누적총량</span> 0.00000 ETH
+					<span data-translate="pool_leaves">상금풀 누적총량</span> { poolWhole.toFixed(5) } ETH
 				</p>
 
 			</div>
@@ -113,14 +113,22 @@
 	</div>
 	<script>
 		var _this = this
+		var BN = require('bignumber.js')
+		var Promise = require('bluebird')
+		_this.mixin('BNMix')
 		//属性
 		_this.cycle = require('../../imgs/cycle.png')
-
+		_this.poolWhole = BN('0')
 		//事件
+		Interface.UI.on('currentRoundInfo',function(data){
+			_this.poolWhole = BN(data[4]).dividedBy(_this.fullUnit)
+		})
+		
+		//生命周期
 		this.on('mount',function(){
-			// $('span#countdown-shikai').countdown(new Date().setHours(new Date().getHours()+6),function(e){
-			// 	$(this).html(e.strftime('%H:%M:%S'));
-			// })
+			$('span#countdown-shikai').countdown(new Date().setHours(new Date().getHours()+6),function(e){
+				$(this).html(e.strftime('%H:%M:%S'));
+			}).countdown('stop')
 			$('shikai .question.circle.outline.icon').click(function(){
 				$('.shikai.ui.basic.modal').modal('show')
 			})

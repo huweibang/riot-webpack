@@ -8,6 +8,15 @@
 			<button class="ui green cancel button" data-translate="ok"></button>
 		</div>
 	</div>
+	<div class="ui modal tiny Public">
+		<div class="header gracefulText"></div>
+		<div class="content">
+			<p></p>
+		</div>
+		<div class="actions">
+			<button class="ui green cancel button" data-translate="ok"></button>
+		</div>
+	</div>
 	<div class="home-container ui container">
 		<div class="logo-title">
 			<img src={ logo_title } />
@@ -77,10 +86,13 @@
 	<script>
 		var anime = require('animejs')
 		var logo_title = require('../../imgs/logo-title.png')
+		var BN = require('bignumber.js')
+		var Promise = require('bluebird')
 		var _this = this
 	// 属性
 	_this.logo_title = logo_title
-	
+	_this.refreshCurrentRoundInfoTimeId = 0
+	_this.countId = 0
 
 	// 事件
 	Interface.UI.on('Contracts.loaded',function(){
@@ -144,12 +156,48 @@
 	})
 
 	// 方法
-	
+	_this.getCurrentRoundInfo = function(){
+		return Interface.Bridges.Metamask.contracts.LuckyStars.read('getCurrentRoundInfo').then(function(dataArr){
+			return Promise.resolve({
+				rID:BN(dataArr[0]),
+				keysAmount:BN(dataArr[1]),
+				startTime:dataArr[2],
+				endTime:dataArr[3],
+				ethDeployedAmount:BN(dataArr[4]),
+				poolWhole:BN(dataArr[5]),
+				ethPer50:BN(dataArr[6]),
+				_lastAddress:dataArr[7],
+
+			})
+		},function(err){
+			return Promise.reject(err)
+		})
+	}
+	_this.refreshCurrentRoundInfo = function(){
+		_this.getCurrentRoundInfo().then(function(currentRoundInfo){
+			Interface.UI.trigger('currentRoundInfo',currentRoundInfo)
+			riot.update()
+		},function(err){
+			console.log(err)
+		})
+		_this.refreshCurrentRoundInfoTimeId = setInterval(function(){
+			_this.countId ++
+			var currentCountId = _this.countId
+			_this.getCurrentRoundInfo().then(function(currentRoundInfo){
+				if(currentCountId == _this.countId){
+					Interface.UI.trigger('currentRoundInfo',currentRoundInfo)
+					riot.update()
+				}	
+			},function(err){
+				console.log(err)
+			})
+		}, 1000)
+	}
 
 	// 生命周期
 	this.on('mount',function(){
 		$('.menu .item').tab()
-		
+		_this.refreshCurrentRoundInfo()
 	})
 
 </script>

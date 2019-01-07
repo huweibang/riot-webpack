@@ -8,7 +8,7 @@
 		<div class="ui grid content">
 			<div class="eight wide column">
 				<p style="white-space: nowrap">
-					<span class="reward-pool">0.00000</span>
+					<span class="reward-pool">{ poolWhole.toFixed(5) }</span>
 					<i class="icon ethereum big"></i>
 				</p>
 				<p style="white-space: nowrap">
@@ -106,11 +106,16 @@
 	</div>
 	<script>
 		var _this = this
+		var BN = require('bignumber.js')
+		var Promise = require('bluebird')
+		_this.mixin('BNMix')
 	// 属性
-	
+	_this.poolWhole = BN(0)
 
 	// 事件
-	
+	Interface.UI.on('currentRoundInfo',function(currentRoundInfo){
+		_this.poolWhole = currentRoundInfo.poolWhole.dividedBy(_this.fullUnit)
+	})
 
 	// 方法
 	

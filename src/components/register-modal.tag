@@ -21,6 +21,7 @@
 	</div>
 	<script>
 		var route = require('riot-route')
+		var Promise = require('bluebird')
 		var _this = this
 		
 	// 属性
@@ -42,7 +43,7 @@
 	// 方法
 	_this.detectRegisterSuccess = function(){
 		function detect(){
-			Interface.Bridges.Metamask.contracts.LuckyStar.read('isInvitationVode',[_this.address]).then(function(isRegistered){
+			Interface.Bridges.Metamask.contracts.Register.read('isInvitationVode',[_this.address]).then(function(isRegistered){
 				if(isRegistered){
 					$(_this.refs.modal).modal('hide')
 					$('.modal.register .ui.dimmer').removeClass('active')
@@ -79,7 +80,7 @@
 				console.log($.i18n.map.validate_invitecode)
 				_this.update()
 				$('.modal.register .ui.dimmer').addClass('active')
-				Interface.Bridges.Metamask.contracts.LuckyStar.read('isInvitationVode',[_this.inviteCode]).then(function(isinviteCodeValid){
+				Interface.Bridges.Metamask.contracts.Register.read('isInvitationVode',[_this.inviteCode]).then(function(isinviteCodeValid){
 					if(!isinviteCodeValid){
 						alert($.i18n.map.invalid_code)
 						$('.modal.register .ui.dimmer').removeClass('active')
@@ -87,8 +88,7 @@
 					}
 					_this.loadingText = $.i18n.map.confirm_register
 					_this.update()
-					$('.modal.register .ui.dimmer').addClass('active')
-					Interface.Bridges.Metamask.contracts.LuckyStar.write('register',[_this.inviteCode]).then(function(){
+					Interface.Bridges.Metamask.contracts.Register.write('register',[_this.inviteCode]).then(function(){
 						_this.loadingText = $.i18n.map.wait_for_register
 						_this.update()
 						_this.detectRegisterSuccess()

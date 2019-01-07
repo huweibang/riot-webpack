@@ -126,22 +126,21 @@
              * @param  {[type]}   params [description]
              * @return {[type]}          [description]
              */
-            async write(fn, params, metadata) {
+            async write(fn, params, metadata,transactionObjectParam) {
                 if (this.bridge.web3.version.api && this.bridge.web3.version.api.includes("0.2")) {
                     if (!params || typeof params === "undefined") params = []
                     if (!Array.isArray(params)) params = [params]
                     return new Promise((res, rej) => {
                         if (metadata && typeof metadata === "object") params.push(metadata)
-                        var transactionObject = {
-                            from:Interface.Bridges.Metamask._lastWallet,
-                            gasPrice: '30000000000'
-                        }
+                        var transactionObject = {from:Interface.Bridges.Metamask._lastWallet,gasPrice:'30000000000'}
+                        if(transactionObjectParam && typeof transactionObjectParam === "object") Object.assign(transactionObject,transactionObjectParam)
                         params.push(transactionObject)
                         params.push(function (err, data) {
                             console.log(err,data)
                             if (err) return rej(err)
                             return res(data)
                         })
+                        console.log(params)
                         try {
                             this.API[fn].apply(null, params)
                         } catch (e) {
@@ -182,7 +181,7 @@
                             this.listen()
                             return
                         } else {                   
-                            $this.trigger('ContractEvent', event)
+                            $this.trigger('Event', event)
                         }
                     })
                 } catch (e) {
@@ -192,18 +191,47 @@
                 }
             }
         }
-        class LuckyStar extends Contract {
+        class Register extends Contract {
             constructor(params){
                 super(_.merge({
-                    name:'LuckyStar',
-                    ABI:contractsDetails['LuckyStar'].ABI
+                    name:'Register',
+                    ABI:contractsDetails['Register'].ABI
                 },params))
 
             }
         }
+        class Payment extends Contract {
+            constructor(params){
+                super(_.merge({
+                    name:'Payment',
+                    ABI:contractsDetails['Payment'].ABI
+                },params))
 
+            }
+        }
+        class TMX extends Contract {
+            constructor(params){
+                super(_.merge({
+                    name:'TMX',
+                    ABI:contractsDetails['TMX'].ABI
+                },params))
+
+            }
+        }
+        class LuckyStars extends Contract {
+            constructor(params){
+                super(_.merge({
+                    name:'LuckyStars',
+                    ABI:contractsDetails['LuckyStars'].ABI
+                },params))
+
+            }
+        }
         module.exports = {
             Bridge: Bridge,
             Contract: Contract,
-            LuckyStar
+            Register,
+            Payment,
+            TMX,
+            LuckyStars
         }

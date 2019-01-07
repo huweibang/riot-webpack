@@ -8,18 +8,18 @@
 		<label for="amount" class="ui label">
 			<i class="icon ethereum normal"></i>
 		</label>
-		<input type="text" placeholder="100 Keys" id="amount" value={ keysFilter() } onblur={ keysInput }/>
-		<div class="ui basic label">@0.100000ETH</div>
+		<input type="text" placeholder="100 Keys" id="amount" oninput={ keysInput }/>
+		<div class="ui basic label">@{ calcedEth.toFixed(5) }ETH</div>
 	</div>
 	<div class="TMX">
 		<div class="ethPlaceHolder">
 			
 		</div>
 		<div class="TMXs">
-			100TMX
+			{ calcedTMX.toFixed(5) }TMX
 		</div>
 		<div class="TMXprice">
-			TMX price:0.000100ETH
+			TMX price:{ TMXprice.toFixed(5) }ETH
 		</div>
 		<i class="question circle outline icon"></i>	
 	</div>
@@ -32,12 +32,12 @@
 	</div>
 	<div class="send-eth ui grid">
 		<div class="eight wide computer eight wide tablet sixteen wide mobile column">
-			<custom-button class="btn-send" animated={true} onclick={ notTheTime }>
+			<custom-button class="btn-send" animated={true} onclick={ purchase }>
 				<span data-translate="send_eth">ETH사용</span>
 			</custom-button>
 		</div>
 		<div class="eight wide computer eight wide tablet sixteen wide mobile column">
-			<button class="ui blue basic button fluid" onclick={ notTheTime }>
+			<button class="ui blue basic button fluid" onclick={ reverse }>
 				<span data-translate="reverse">보너스 사용</span>
 			</button>
 		</div>
@@ -75,35 +75,161 @@
 			</div>
 		</div>
 	</div>
+	<div class="ui tiny modal reverse">
+		<div class="header" data-translate="reverse">提现</div>
+		<div class="content">
+			<div class="ui fluid icon input">
+				<input type="text" class="reverseAmount" />
+				<i class="ethereum icon"></i>
+			</div>
+		</div>
+		<div class="actions">
+			<div class="ui green button" id="reverse" data-translate="reverse" onclick={ reverseHandler }>提现</div>
+			<div class="ui cancel red button" data-translate="cancel">取消</div>
+		</div>
+	</div>
 	<script>
+		var BN = require('bignumber.js')
+		var Promise = require('bluebird')
 		var _this = this
+		_this.mixin('BNMix')
 	// 属性
 	_this.keys = 10
-	
-
+	_this.TMXprice = BN(0)
+	_this.calcedEth = BN(0)
+	_this.calcedTMX = BN(0)
+	_this.calcing = false
+	_this.purchasing = false
+	_this.TMXs = 0
+	_this.operateCount = 0
+	_this.delayQueryEthTimeId = 0
 	// 事件
 	_this.keysInput = function(e){
 		_this.keys = parseInt(e.target.value) || 0
+		e.preventUpdate = true
+		_this.calcing = true
+		clearTimeout(_this.delayQueryEthTimeId)
+		_this.delayQueryEthTimeId = setTimeout(function(){
+			$('#amount').val(_this.keysFilter())
+			_this.reCalcETHandTMX()
+		}, 1000)
 	}
 	_this.more10Key = function(){
 		_this.keys += 10
+		$('#amount').val(_this.keysFilter())
+		_this.reCalcETHandTMX()
 	}
 	_this.more20Key = function(){
 		_this.keys += 20
+		$('#amount').val(_this.keysFilter())
+		_this.reCalcETHandTMX()
 	}
 	_this.more40Key = function(){
 		_this.keys += 40
+		$('#amount').val(_this.keysFilter())
+		_this.reCalcETHandTMX()
 	}
 	_this.more80Key = function(){
 		_this.keys += 80
+		$('#amount').val(_this.keysFilter())
+		_this.reCalcETHandTMX()
 	}
 	_this.more100Key = function(){
 		_this.keys += 100
+		$('#amount').val(_this.keysFilter())
+		_this.reCalcETHandTMX()
 	}
+	
 	_this.notTheTime = function(){
 		$('.notTheTime.modal').modal('show')
 	}
+	_this.purchase = function(){
+		function processPurchase(){
+			Interface.Bridges.Metamask.contracts.LuckyStars.write('buy',[],undefined,{value:currentPurchasEth.multipliedBy(_this.fullUnit).toFixed(0).toString() }).then(function(){
+				_this.purchasing = false
+			},function(){
+				_this.purchasing = false
+			})
+		}
+		function initPurchase(){
+			var allowance,balance,TMXToDestory = currentPurchasTMX
+			return Promise.all([_this.getAllowance(),_this.getBalanceOfMe()]).then(function(data){
+				allowance = BN(data[0])
+				balance = BN(data[1])
+				return new Promise(function(res,rej){
+					res({
+						allowance:allowance,
+						balance:balance,
+						TMXToDestory:TMXToDestory
+					})
+				})
+			},function(){
 
+			})
+		}
+		var currentPurchasEth,currentPurchasTMX
+		if(_this.purchasing){
+			$('.ui.modal.tiny.Public .header').text("提示")
+			$('.ui.modal.tiny.Public .content p').text("正在处理当前购买！")
+			$('.ui.modal.tiny.Public').modal('show')
+			return
+		}
+		_this.purchasing = true
+		
+		if(_this.calcing){
+			_this.purchasing = false
+			return
+		}
+		if(!Interface.Cache.isRegistered){
+			$('.ui.modal.tiny.Public .header').text($.i18n.map.welcome)
+			$('.ui.modal.tiny.Public .content p').text($.i18n.map.please_register)
+			$('.ui.modal.tiny.Public').modal('show')
+			_this.purchasing = false
+			return
+		}
+		
+		_this.reCalcETHandTMX(function(err){
+			currentPurchasEth = _this.calcedEth
+			currentPurchasTMX = _this.calcedTMX
+			if(currentPurchasEth.isLessThan(BN('0.1')) || currentPurchasEth.isGreaterThan(BN("30"))){
+				$('.ui.modal.tiny.Public .header').text("提示")
+				$('.ui.modal.tiny.Public .content p').text("支付的ETH在0.1ETH-30ETH之间！")
+				$('.ui.modal.tiny.Public').modal('show')
+				_this.purchasing = false
+				return
+			}		
+			initPurchase().then(function(data){
+				if(data.balance.isLessThan(data.TMXToDestory)){
+					$('.ui.modal.tiny.Public .header').text("提示")
+					$('.ui.modal.tiny.Public .content p').text("TMX余额不足！")
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.purchasing = false
+					return
+				}else if(data.allowance.isLessThan(data.TMXToDestory)){
+					_this.newApprove().then(function(){
+						processPurchase()
+					},function(){
+
+					})
+				}else {
+					processPurchase()
+				}
+			})
+		})
+		
+
+	}
+	_this.reverse = function(){
+		$('.ui.tiny.modal.reverse').modal('show')
+	}
+	_this.reverseHandler = function(e){
+		var reverseAmount = (BN(parseFloat($('.reverseAmount').val())).multipliedBy(_this.fullUnit)).toString()
+		Interface.Bridges.Metamask.contracts.LuckyStars.write('reLoadBuy',[reverseAmount]).then(function(){
+			$('.ui.tiny.modal.reverse').modal('hide')
+		},function(){
+			$('.ui.tiny.modal.reverse').modal('hide')
+		})
+	}
 	// 方法
 	_this.keysFilter = function(){
 		if(_this.keys > 1){
@@ -113,15 +239,71 @@
 		}
 		
 	}
+	_this.newApprove = function(){
+		return Interface.Bridges.Metamask.contracts.TMX.write('approve',[Interface.Bridges.Metamask.contracts.Payment.API.address,1e23.toString()]).then(_this.processApprove)
+	}
+	_this.processApprove = function(){
+		return new Promise(function(res,rej){
+			function validateAllowance(){
+				_this.getAllowance().then(function(data){
+					if((BN(data)).isEqualTo(1e23)){
+						res(true)
+					}else {
+						validateAllowance()
+					}
+				},function(err){
+					validateAllowance()
+				})
+			}
+			validateAllowance()
+		})
+	}
+	_this.getAllowance = function(){
+		return Interface.Bridges.Metamask.contracts.TMX.read('allowance',[Interface.Bridges.Metamask._lastWallet,Interface.Bridges.Metamask.contracts.Payment.API.address])
+	}
+	_this.getBalanceOfMe = function(){
+		return Interface.Bridges.Metamask.contracts.TMX.read('balanceOf',[Interface.Bridges.Metamask._lastWallet])
+	}
+	
+	_this.reCalcETHandTMX = function(cb){
+		_this.operateCount++
+		_this.calcing = true
+		var currentOperate = _this.operateCount
+		var currentCalcKeys = _this.keys
+		Interface.Bridges.Metamask.contracts.LuckyStars.read("iWantXKeys",[((BN(_this.fullUnit)).multipliedBy(BN(currentCalcKeys))).toString()]).then(function(data){
+			if(_this.operateCount == currentOperate){
+				var priceFix = BN(data[0]).multipliedBy((currentCalcKeys+0.01)/currentCalcKeys)
+				_this.calcedEth = priceFix.dividedBy(_this.fullUnit)
+				_this.calcedTMX = (BN(data[1])).dividedBy(_this.fullUnit)
+				_this.calcing = false
+				_this.update()
+				if(cb) cb()
+			}
+	},function(err){
+		if(cb) cb(err)
+	})
+	}
+	
+	_this.getTMXPrice = function(){
+		Interface.Bridges.Metamask.contracts.Payment.read("getTMXprice").then(function(data){
+			_this.TMXprice = (BN(1)).dividedBy(data)
+			_this.update()
+		},function(err){
 
+		})
+	}
 	// 生命周期
 	this.on('mount',function(){
+		$('#amount').val('10 Keys')
 		$('Subpage-purchase h2 .question.circle.outline.icon').click(function(){
 			$('.subpage-purchase.ui.basic.modal').modal('show')
 		})
 		$('Subpage-purchase .TMX .question.circle.outline.icon').click(function(){
 			$('.TMXModal.ui.basic.modal').modal('show')
 		})
+		console.log(BN(0))
+		_this.getTMXPrice()
+		_this.reCalcETHandTMX()
 	})
 </script>
 

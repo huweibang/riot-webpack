@@ -41,7 +41,12 @@ if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobi
 		theme:'minimal'
 	})
 }
-
+var BNMix = {
+	init:function(){
+		this.fullUnit = 1e18
+	}
+}
+riot.mixin('BNMix',BNMix)
 // 初始化web3 合约
 $(async function(){	
 	await Interface.connect({
@@ -52,18 +57,33 @@ $(async function(){
 		}, {
 			name: "Browser",
 			// API: "https://rinkeby.infura.io/YKZGQG2QTBx0tiWoB2IF"
-			API: "https://mainnet.infura.io/YKZGQG2QTBx0tiWoB2IF"
+			API: "https://rinkeby.infura.io/YKZGQG2QTBx0tiWoB2IF"
 		}, {
 			name: "Websocket",
 			// API: new Web3(new Web3.providers.WebsocketProvider("wss://rinkeby.infura.io/_ws"))
-			API: new Web3(new Web3.providers.WebsocketProvider("wss://mainnet.infura.io/_ws"))
+			API: new Web3(new Web3.providers.WebsocketProvider("wss://rinkeby.infura.io/_ws"))
 		}
 		],
 		contracts: [
 		{
-			name: contractsDetails['LuckyStar'].name,
-			model: Ethereum.LuckyStar,      
-			address: contractsDetails['LuckyStar'].address
+			name: contractsDetails['Register'].name,
+			model: Ethereum.Register,      
+			address: contractsDetails['Register'].address
+		},
+		{
+			name: contractsDetails['TMX'].name,
+			model: Ethereum.TMX,      
+			address: contractsDetails['TMX'].address
+		},
+		{
+			name: contractsDetails['Payment'].name,
+			model: Ethereum.Payment,      
+			address: contractsDetails['Payment'].address
+		},
+		{
+			name: contractsDetails['LuckyStars'].name,
+			model: Ethereum.LuckyStars,      
+			address: contractsDetails['LuckyStars'].address
 		}
 		]
 	})
@@ -82,11 +102,24 @@ $(async function(){
 		}).modal('show')
 		return
 	}
-	await Interface.Bridges.Websocket.contracts.LuckyStar.listen()
-
 	// 监听 web3 websocket事件
-	Interface.Bridges.Websocket.contracts.LuckyStar.on('ContractEvent', async (event) => {
-		console.log(event)
+	await Interface.Bridges.Websocket.contracts.Register.listen()
+	await Interface.Bridges.Websocket.contracts.TMX.listen()
+	await Interface.Bridges.Websocket.contracts.Payment.listen()
+	await Interface.Bridges.Websocket.contracts.LuckyStars.listen()
+
+	
+	Interface.Bridges.Websocket.contracts.Register.on('Event', async (event) => {
+		console.log('ContractEvent',event)
+	})
+	Interface.Bridges.Websocket.contracts.TMX.on('Event', async (event) => {
+		console.log('TMXEvent',event)
+	})
+	Interface.Bridges.Websocket.contracts.Payment.on('Event', async (event) => {
+		console.log('PaymentEvent',event)
+	})
+	Interface.Bridges.Websocket.contracts.LuckyStars.on('Event', async (event) => {
+		console.log('LSEvent',event)
 	})
 	require('./router.js')
 	
