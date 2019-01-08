@@ -52,8 +52,8 @@
 				}else {
 					detect()
 				}
-			},function(){
-
+			},function(err){
+				Interface.UI.trigger('GraceWarning',err)
 			})
 		}
 		detect()
@@ -77,12 +77,11 @@
 			onSuccess:function(e){
 				e.preventDefault()
 				_this.loadingText = $.i18n.map.validate_invitecode
-				console.log($.i18n.map.validate_invitecode)
 				_this.update()
 				$('.modal.register .ui.dimmer').addClass('active')
 				Interface.Bridges.Metamask.contracts.Register.read('isInvitationVode',[_this.inviteCode]).then(function(isinviteCodeValid){
 					if(!isinviteCodeValid){
-						alert($.i18n.map.invalid_code)
+						Interface.UI.trigger('GraceError',err)
 						$('.modal.register .ui.dimmer').removeClass('active')
 						return
 					}
@@ -93,6 +92,7 @@
 						_this.update()
 						_this.detectRegisterSuccess()
 					},function(){
+						Interface.UI.trigger('GraceWarning',err)
 						$(_this.refs.modal).modal('hide')
 						$('.modal.register .ui.dimmer').removeClass('active')
 					})

@@ -1,0 +1,13 @@
+UI event mapping
+
+//购买
+purchasFail 购买过程异常中断
+confirmPurchas 确认购买
+cancelPurchas 取消购买
+
+//好友
+inviteCodeCopied 邀请码复制成功
+
+//util
+GraceWarning Websocket数据获取失败
+GraceError 用户主动逻辑错误

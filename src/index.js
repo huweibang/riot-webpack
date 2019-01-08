@@ -18,6 +18,7 @@ import './components/custom-button.tag'
 import './components/null.tag'
 import './components/register-modal.tag'
 import './components/pendingLine.tag'
+import './components/graceTopHeader.tag'
 import '@babel/polyfill'
 import './i18n/jquery-i18n-properties.js'
 import './i18n/lang_zh.properties'
@@ -120,6 +121,23 @@ $(async function(){
 	})
 	Interface.Bridges.Websocket.contracts.LuckyStars.on('Event', async (event) => {
 		console.log('LSEvent',event)
+	})
+	//大量的游戏事件trigger
+	Interface.Bridges.Websocket.contracts.LuckyStars.on('Event',function(event){
+		switch(event.event){
+			case 'LogAirdrop':
+			Interface.UI.trigger('Airdrop')
+			break;
+			case 'LogTimeEndRound':
+			Interface.UI.trigger('TimeEndRound')
+			break;
+			case 'LogQuantityAward':
+			Interface.UI.trigger('QuantityAward')
+			break;
+			case 'LogWithdraw':
+			Interface.UI.trigger('Withdraw')
+			break;
+		}
 	})
 	require('./router.js')
 	

@@ -118,10 +118,10 @@
 		_this.mixin('BNMix')
 		//属性
 		_this.cycle = require('../../imgs/cycle.png')
-		_this.poolWhole = BN('0')
+		_this.poolWhole = BN(0)
 		//事件
-		Interface.UI.on('currentRoundInfo',function(data){
-			_this.poolWhole = BN(data[4]).dividedBy(_this.fullUnit)
+		Interface.UI.on('currentRoundInfo',function(currentRoundInfo){
+			_this.poolWhole = currentRoundInfo.poolWhole.dividedBy(1e18)
 		})
 		
 		//生命周期

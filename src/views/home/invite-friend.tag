@@ -8,21 +8,21 @@
 			<div class="six wide computer six wide tablet six wide mobile column share-button-wrapper right aligned">
 				<div class="whole-wrapper">
 					<i class="question circle outline icon"></i><br />
-				<custom-button><span data-translate="share">分享</span></custom-button>
+					<custom-button><span data-translate="share">分享</span></custom-button>
 				</div>
 				
 			</div>
 		</div>
 	</div>
 	<h4 class="ui header" data-translate="invite_fund">초대 리워드</h4>
-	<div class="invite-reward-list">
+	<div class="invite-reward-list" ref="reward_list">
 		<div class="ui grid">
-			<div class="row" each={ value,i in friendsMap }>
+			<div class="row" each={ item,i in friendsMap }>
 				<div class="six wide computer six wide tablet sixteen wide mobile column">
-					<span data-translate={ "friends_" + (i + 1) }>{ $.i18n.map["friends_" + (i + 1)] }</span>{  friendsMap[i].toNumber() }
+					<span data-translate={ "friends_" + (i + 1) }>{ $.i18n.map["friends_" + (i + 1)] }</span>{ item.amount.toNumber() }
 				</div>
 				<div class="ten wide computer ten wide tablet sixteen wide mobile column right aligned">
-					<span data-translate="prompt_fund">추천인 리워드：</span>0.00000ETH
+					<span data-translate="prompt_fund">추천인 리워드：</span>{ item.dividend.toFixed(5) }ETH
 				</div>
 			</div>	
 		</div>	
@@ -80,6 +80,7 @@
 	_this.$ = $
 	_this.clipboard = null
 	_this.friendsMap = []
+	// 方法
 	_this.shareLink = function(){
 		if(Interface.Bridges.Metamask && Interface.Bridges.Metamask._lastWallet){
 			return 'https://luckystars.folengame.com/?inviteCode='+Interface.Bridges.Metamask._lastWallet
@@ -88,17 +89,52 @@
 		}
 	}
 	_this.copySuccessCb = function(){
-		alert('您的专属邀请链接已复制！')
+		Interface.UI.trigger('inviteCodeCopied')
 	}
 	_this.getFriendsMap =function(){
-		Interface.Bridges.Metamask.contracts.Register.read('getNumberOfInvited',Interface.Bridges.Metamask._lastWallet).then(function(friendsMap){
-			friendsMap.length = friendsMap[0].toNumber()
-			_this.friendsMap = friendsMap
+		Promise.all([Interface.Bridges.Metamask.contracts.Register.read('getNumberOfInvited',Interface.Bridges.Metamask._lastWallet),Interface.Bridges.Metamask.contracts.LuckyStars.read('getPlayerAffValue',Interface.Bridges.Metamask._lastWallet)]).then(function(data){
+			var length = data[0][0].toNumber()
+			length = (length > 13) ? 13 : length
+			var relationComplexed = []
+			for(var i = 0;i < length; i++){
+				relationComplexed.push({
+					amount : data[0][i],
+					dividend : data[1][i]
+				})
+			}
+			_this.friendsMap = relationComplexed
 			_this.update()
-		},function(error){})
-		
+		},function(err){
+			Interface.UI.trigger('GraceWarning',err)
+		})
+
 	}
-	Interface.Bridges.Metamask && Interface.Bridges.Metamask.on('account.signedIn',function(){
+
+	_this.validateRelative = function(address){
+		return Interface.Bridges.Websocket.contracts.Register.read('getRelationChain',[address]).then(function(relationArray){
+			return Promise.resolve(relationArray.some(function(e){
+				return e.toLowerCase() == Interface.Bridges.Metamask._lastWallet
+			}))
+		},function(err){
+			return Promise.reject(err)
+		})
+	}
+	// 事件
+	Interface.Bridges.Websocket.contracts.Register.on('Event',function(event){
+		var isMe = (event.returnValues.inviter.toLowerCase() == Interface.Bridges.Metamask._lastWallet)
+		if(event.event == 'LogRegistered' && isMe){
+			_this.getFriendsMap()
+		}else if(Interface.Bridges.Metamask._lastWallet){
+			_this.validateRelative(event.returnValues.player).then(function(isRelated){
+				if(isRelated){
+					_this.getFriendsMap()
+				}
+			},function(err){
+				Interface.UI.trigger('GraceWarning',err)
+			})
+		}
+	})
+	Interface.Bridges.Metamask.on('account.signedIn',function(){
 		_this.clipboard = new ClipboardJS('invite-friend .share-button-wrapper .custom-button', {
 			text:_this.shareLink
 		})
@@ -113,8 +149,15 @@
 		$('invite-friend .question.circle.outline.icon').click(function(){
 			$('.invite-friend.ui.basic.modal').modal('show')
 		})
-		if(Interface.Bridges.Metamask && Interface.Bridges.Metamask.signedIn){
+		if(Interface.Bridges.Metamask.signedIn){
 			_this.getFriendsMap()
+		}
+		if(Interface.UI.device === 'others'){
+			$(_this.refs.reward_list).mCustomScrollbar({
+				theme:'minimal',
+				mouseWheel:{ enable:true},
+				autoHideScrollbar:true
+			})
 		}
 	})
 </script>

@@ -65,7 +65,6 @@
 	})
 	Interface.Bridges.Websocket.contracts.TMX.on('Event',function(event){
 		var isMe = (event.returnValues.from.toLowerCase() == Interface.Bridges.Metamask._lastWallet.toLowerCase())
-		console.log(isMe,event.event)
 		if(event.event == 'Transfer' && isMe){
 			// 暂时性处理
 			_this.initCount()
@@ -79,8 +78,8 @@
 	_this.initCount = function(){
 		Promise.all([_this.getBurnAmount()]).then(function(dataArray){
 			_this.burnAmount = BN(dataArray[0]).dividedBy(_this.fullUnit)
-		},function(){
-
+		},function(err){
+			Interface.UI.trigger('GraceWarning',err)
 		})
 	}
 	_this.timeAmount = function(){

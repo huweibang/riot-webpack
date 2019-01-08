@@ -117,7 +117,7 @@
 		return Interface.Bridges.Metamask.contracts.Payment.read('getBurnAmount',[Interface.Bridges.Metamask._lastWallet]).then(function(data){
 			_this.burnAmount = BN(data).dividedBy(_this.fullUnit)
 		},function(err){
-			console.log(err)
+			Interface.UI.trigger('GraceWarning',err)
 		})
 	}
 	_this.getPlayerInfoByAddress = function(){
@@ -139,7 +139,7 @@
 		_this.getPlayerInfoByAddress().then(function(playerInfo){
 			Interface.UI.trigger('currentPlayerInfo',playerInfo)
 		},function(err){
-			Interface.UI.trigger('currentPlayerInfoError',err)		
+			Interface.UI.trigger('GraceWarning',err)	
 		})
 		clearInterval(_this.playerInfoTimeId)
 		_this.playerInfoTimeId = setInterval(function(){
@@ -152,7 +152,7 @@
 				
 			},function(err){
 				if(_this.countId == currentCountId ){
-					Interface.UI.trigger('currentPlayerInfoError',err)
+					Interface.UI.trigger('GraceWarning',err)
 				}		
 			})
 		},1000)
@@ -169,7 +169,6 @@
 	})
 	Interface.Bridges.Websocket.contracts.TMX.on('Event',function(event){
 		var isMe = (event.returnValues.from.toLowerCase() == Interface.Bridges.Metamask._lastWallet.toLowerCase())
-		console.log(isMe,event.event)
 		if(event.event == 'Transfer' && isMe){
 			// 暂时性处理
 			_this.getBurnAmount()		

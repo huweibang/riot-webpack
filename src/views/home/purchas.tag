@@ -147,7 +147,9 @@
 		function processPurchase(){
 			Interface.Bridges.Metamask.contracts.LuckyStars.write('buy',[],undefined,{value:currentPurchasEth.multipliedBy(_this.fullUnit).toFixed(0).toString() }).then(function(){
 				_this.purchasing = false
+				Interface.UI.trigger('confirmPurchas')
 			},function(){
+				Interface.UI.trigger('cancelPurchas')
 				_this.purchasing = false
 			})
 		}
@@ -163,8 +165,8 @@
 						TMXToDestory:TMXToDestory
 					})
 				})
-			},function(){
-
+			},function(err){
+				Interface.UI.trigger('GraceError',err)
 			})
 		}
 		var currentPurchasEth,currentPurchasTMX
@@ -189,6 +191,9 @@
 		}
 		
 		_this.reCalcETHandTMX(function(err){
+			if(err){
+				return
+			}
 			currentPurchasEth = _this.calcedEth
 			currentPurchasTMX = _this.calcedTMX
 			if(currentPurchasEth.isLessThan(BN('0.1')) || currentPurchasEth.isGreaterThan(BN("30"))){
@@ -280,6 +285,7 @@
 				if(cb) cb()
 			}
 	},function(err){
+		Interface.UI.trigger('purchasFail',err)
 		if(cb) cb(err)
 	})
 	}
@@ -289,7 +295,7 @@
 			_this.TMXprice = (BN(1)).dividedBy(data)
 			_this.update()
 		},function(err){
-
+			Interface.UI.trigger('GraceWarning',err)
 		})
 	}
 	// 生命周期
@@ -301,7 +307,6 @@
 		$('Subpage-purchase .TMX .question.circle.outline.icon').click(function(){
 			$('.TMXModal.ui.basic.modal').modal('show')
 		})
-		console.log(BN(0))
 		_this.getTMXPrice()
 		_this.reCalcETHandTMX()
 	})

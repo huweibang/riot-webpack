@@ -140,7 +140,6 @@
                             if (err) return rej(err)
                             return res(data)
                         })
-                        console.log(params)
                         try {
                             this.API[fn].apply(null, params)
                         } catch (e) {
@@ -175,7 +174,6 @@
                     this.listeners.ws = this.API.events.allEvents(function (err, event, sub) {
                         console.log("incoming..")
                         var tt = typeof err
-                        console.log("Bridge reporting", err, event, sub, tt)
                         if (err) {
                             console.log("closing and reopening..", err, event, sub)
                             this.listen()

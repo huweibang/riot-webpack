@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div class="ui modal tiny Public">
-		<div class="header gracefulText"></div>
+		<div class="header"></div>
 		<div class="content">
 			<p></p>
 		</div>
@@ -154,7 +154,6 @@
 			})
 		}
 	})
-
 	// 方法
 	_this.getCurrentRoundInfo = function(){
 		return Interface.Bridges.Metamask.contracts.LuckyStars.read('getCurrentRoundInfo').then(function(dataArr){
@@ -178,7 +177,7 @@
 			Interface.UI.trigger('currentRoundInfo',currentRoundInfo)
 			riot.update()
 		},function(err){
-			console.log(err)
+			Interface.UI.trigger('GraceWarning',err)
 		})
 		_this.refreshCurrentRoundInfoTimeId = setInterval(function(){
 			_this.countId ++
@@ -189,7 +188,7 @@
 					riot.update()
 				}	
 			},function(err){
-				console.log(err)
+				Interface.UI.trigger('GraceWarning',err)
 			})
 		}, 1000)
 	}
