@@ -1,6 +1,7 @@
 // 时开
 <shikai>
 	<div class="ui segment">
+		<i class="ui icon hourglass half massive backicon"></i>
 		<h4 class="ui header"><span data-translate="shikai">시간대별 안내</span><i class="question circle outline icon"></i></h4>
 		<div class="bordergroup one"></div>
 		<div class="bordergroup two"></div>
@@ -12,7 +13,7 @@
 					<i class="icon stopwatch big"></i>
 				</p>
 				<p style="white-space: nowrap">
-					<span data-translate="pool_leaves">상금풀 누적총량</span> { poolWhole.toFixed(5) } ETH
+					<span data-translate="pool_leaves">상금풀 누적총량</span> { ethDeployedAmount.toFixed(5) } ETH
 				</p>
 
 			</div>
@@ -118,10 +119,10 @@
 		_this.mixin('BNMix')
 		//属性
 		_this.cycle = require('../../imgs/cycle.png')
-		_this.poolWhole = BN(0)
+		_this.ethDeployedAmount = BN(0)
 		//事件
 		Interface.UI.on('currentRoundInfo',function(currentRoundInfo){
-			_this.poolWhole = currentRoundInfo.poolWhole.dividedBy(1e18)
+			_this.ethDeployedAmount = currentRoundInfo.ethDeployedAmount.dividedBy(1e18)
 		})
 		
 		//生命周期
@@ -151,7 +152,6 @@
 	.ui.grid.reward {
 		margin: 1rem -1rem;
 	}
-	
 	.cycle {
 		transform-origin: 50%,50%;
 		animation: 1s linear rotateCycle infinite;

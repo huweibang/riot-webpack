@@ -29,13 +29,13 @@
 		<div class="ui divider"></div>
 		<div class="ui grid">
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="coin_withdraw">已提币数量</div>
-			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">0.00000 ETH</div> 
-			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="coin_non_withdraw">未提币数量</div>
 			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ withdrawed.toFixed(5) } ETH</div> 
+			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="coin_non_withdraw">未提币数量</div>
+			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">0.00000 ETH</div> 
 		</div>
 		<div class="ui grid">
 			<div class="sixteen wide column">
-				<custom-button onclick={ withdraw } class="btn-send" animated={true}><span data-translate="eth_withdraw">提取ETH</span></custom-button>
+				<button class={ ui:true,button:true,fluid:true,'btn-send':true,loading:withdrawing,graceButton:true } onclick={ withdraw } data-translate="eth_withdraw">提取ETH</button>
 			</div>
 		</div>
 	</div>
@@ -83,8 +83,9 @@
 	.bordergroup.two {
 		background-color: #282747;
 	}
-	.btn-send {
+	.btn-send.ui.button {
 		margin-top: 2rem;
+
 	}
 </style>
 <script>
@@ -93,6 +94,7 @@
 	var Promise = require('bluebird')
 	_this.mixin('BNMix')
 	//属性
+	_this.withdrawing = false
 	_this.playerInfoTimeId = 0
 	_this.countId = 0
 	_this.burnAmount = BN(0)
@@ -105,8 +107,19 @@
 
 	//方法
 	_this.withdraw = function(){
+		if(_this.withdrawing){
+			$('.ui.modal.tiny.Public .header').text($.i18n.map.welcome)
+			$('.ui.modal.tiny.Public .content p').text($.i18n.map.process_purchasing)
+			$('.ui.modal.tiny.Public').modal('show')
+			return
+		}
 		if(Interface.Cache.isRegistered){
-			Interface.Bridges.Metamask.contracts.LuckyStars.write('withdraw')
+			_this.withdrawing = true
+			Interface.Bridges.Metamask.contracts.LuckyStars.write('withdraw').then(function(){
+				_this.withdrawing = false
+			},function(){
+				_this.withdrawing = false
+			})
 		}else {
 			$('.ui.modal.tiny.Public .header').text($.i18n.map.welcome)
 			$('.ui.modal.tiny.Public .content p').text($.i18n.map.please_register)
@@ -117,7 +130,7 @@
 		return Interface.Bridges.Metamask.contracts.Payment.read('getBurnAmount',[Interface.Bridges.Metamask._lastWallet]).then(function(data){
 			_this.burnAmount = BN(data).dividedBy(_this.fullUnit)
 		},function(err){
-			Interface.UI.trigger('GraceWarning',err)
+			Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 		})
 	}
 	_this.getPlayerInfoByAddress = function(){
@@ -139,7 +152,7 @@
 		_this.getPlayerInfoByAddress().then(function(playerInfo){
 			Interface.UI.trigger('currentPlayerInfo',playerInfo)
 		},function(err){
-			Interface.UI.trigger('GraceWarning',err)	
+			Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 		})
 		clearInterval(_this.playerInfoTimeId)
 		_this.playerInfoTimeId = setInterval(function(){
@@ -152,7 +165,7 @@
 				
 			},function(err){
 				if(_this.countId == currentCountId ){
-					Interface.UI.trigger('GraceWarning',err)
+					Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 				}		
 			})
 		},1000)
@@ -168,8 +181,7 @@
 		_this.withdrawed = playerInfo.withdrawed.dividedBy(1e18)
 	})
 	Interface.Bridges.Websocket.contracts.TMX.on('Event',function(event){
-		var isMe = (event.returnValues.from.toLowerCase() == Interface.Bridges.Metamask._lastWallet.toLowerCase())
-		if(event.event == 'Transfer' && isMe){
+		if(event.event == 'Transfer' && (event.returnValues.from.toLowerCase() == Interface.Bridges.Metamask._lastWallet.toLowerCase())){
 			// 暂时性处理
 			_this.getBurnAmount()		
 		}

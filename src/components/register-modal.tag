@@ -53,7 +53,7 @@
 					detect()
 				}
 			},function(err){
-				Interface.UI.trigger('GraceWarning',err)
+				Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 			})
 		}
 		detect()
@@ -81,7 +81,7 @@
 				$('.modal.register .ui.dimmer').addClass('active')
 				Interface.Bridges.Metamask.contracts.Register.read('isInvitationVode',[_this.inviteCode]).then(function(isinviteCodeValid){
 					if(!isinviteCodeValid){
-						Interface.UI.trigger('GraceError',err)
+						Interface.UI.trigger('GraceError',$.i18n.map.invalid_code)
 						$('.modal.register .ui.dimmer').removeClass('active')
 						return
 					}
@@ -92,7 +92,6 @@
 						_this.update()
 						_this.detectRegisterSuccess()
 					},function(){
-						Interface.UI.trigger('GraceWarning',err)
 						$(_this.refs.modal).modal('hide')
 						$('.modal.register .ui.dimmer').removeClass('active')
 					})

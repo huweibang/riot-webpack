@@ -37,9 +37,8 @@
 									<img src={ loading_wifi } />
 								</div>
 								<div class="user-control">		
-									<custom-button onclick={ register_handle } if={ signedIn && isRegistered === false }>
-										<span data-translate="register"></span>
-									</custom-button>
+									
+									<button class="ui button graceButton fluid register" onclick={ register_handle } if={ signedIn && isRegistered === false } data-translate="register"></button>
 									<div class="registered" if={ signedIn && isRegistered === true }>
 										<i class="check circle outline icon large"></i>
 										<div>{ $.i18n.map.registered }</div>
@@ -47,11 +46,8 @@
 								</div>
 							</div>
 						</div>
-
-
 					</div>
 				</div>		
-				<graceTopHeader></graceTopHeader>
 
 			</div>
 
@@ -103,7 +99,7 @@
 							_this.update()
 							$('[data-translate=register]').text($.i18n.map.register)
 						},function(){
-							Interface.UI.trigger('GraceWarning',err)
+							Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 						})
 						
 					}
@@ -123,7 +119,7 @@
 							_this.update()
 							$('[data-translate=register]').text($.i18n.map.register)
 						},function(){
-							Interface.UI.trigger('GraceWarning',err)
+							Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 						})
 					}
 					
@@ -179,7 +175,7 @@
 				flex: 0 0 auto;
 				
 			}
-			.header-container .user-control .custom-button {
+			.ui.button.register {
 				padding: 0;
 				line-height: 2rem;
 				font-size: 1rem;
@@ -190,7 +186,7 @@
 				text-align: center;
 			}
 			.header-container .status-bar>span {
-				margin-right: 3rem;
+				margin-right: 1.5rem;
 			}
 			.nationality {
 				line-height: 3rem;

@@ -8,6 +8,7 @@
 		<label for="amount" class="ui label">
 			<i class="icon ethereum normal"></i>
 		</label>
+
 		<input type="text" placeholder="100 Keys" id="amount" oninput={ keysInput }/>
 		<div class="ui basic label">@{ calcedEth.toFixed(5) }ETH</div>
 	</div>
@@ -32,9 +33,11 @@
 	</div>
 	<div class="send-eth ui grid">
 		<div class="eight wide computer eight wide tablet sixteen wide mobile column">
-			<custom-button class="btn-send" animated={true} onclick={ purchase }>
+			<!-- <custom-button class="btn-send" animated={true} onclick={ purchase }>
 				<span data-translate="send_eth">ETH사용</span>
-			</custom-button>
+				
+			</custom-button> -->
+			<button class={ ui:true,button:true,fluid:true,'btn-send':true,loading:purchasing,graceButton:true } onclick={ purchase } data-translate="send_eth">ETH사용</button>
 		</div>
 		<div class="eight wide computer eight wide tablet sixteen wide mobile column">
 			<button class="ui blue basic button fluid" onclick={ reverse }>
@@ -92,8 +95,10 @@
 		var BN = require('bignumber.js')
 		var Promise = require('bluebird')
 		var _this = this
+
 		_this.mixin('BNMix')
 	// 属性
+	_this.i18n = $.i18n.map
 	_this.keys = 10
 	_this.TMXprice = BN(0)
 	_this.calcedEth = BN(0)
@@ -104,6 +109,11 @@
 	_this.operateCount = 0
 	_this.delayQueryEthTimeId = 0
 	// 事件
+	Interface.UI.on('purchas10Keys',function(){
+		_this.keys = 10
+		$('#amount').val(_this.keysFilter())
+		_this.purchase()
+	})
 	_this.keysInput = function(e){
 		_this.keys = parseInt(e.target.value) || 0
 		e.preventUpdate = true
@@ -144,6 +154,92 @@
 		$('.notTheTime.modal').modal('show')
 	}
 	_this.purchase = function(){
+		// 前端购买冗余逻辑
+		// function processPurchase(){
+		// 	Interface.Bridges.Metamask.contracts.LuckyStars.write('buy',[],undefined,{value:currentPurchasEth.multipliedBy(_this.fullUnit).toFixed(0).toString() }).then(function(){
+		// 		_this.purchasing = false
+		// 		Interface.UI.trigger('confirmPurchas')
+		// 	},function(){
+		// 		Interface.UI.trigger('cancelPurchas')
+		// 		_this.purchasing = false
+		// 	})
+		// }
+		// function initPurchase(){
+		// 	var allowance,balance,TMXToDestory = currentPurchasTMX
+		// 	return Promise.all([_this.getAllowance(),_this.getBalanceOfMe()]).then(function(data){
+		// 		allowance = BN(data[0])
+		// 		balance = BN(data[1])
+		// 		return new Promise(function(res,rej){
+		// 			res({
+		// 				allowance:allowance,
+		// 				balance:balance,
+		// 				TMXToDestory:TMXToDestory
+		// 			})
+		// 		})
+		// 	},function(err){
+		// 		Interface.UI.trigger('GraceError',err)
+		// 	})
+		// }
+		// var currentPurchasEth,currentPurchasTMX
+		// if(_this.purchasing){
+		// 	$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+		// 	$('.ui.modal.tiny.Public .content p').text($.i18n.map.process_purchasing)
+		// 	$('.ui.modal.tiny.Public').modal('show')
+		// 	return
+		// }
+		// _this.purchasing = true
+		
+		// if(_this.calcing){
+		// 	_this.purchasing = false
+		// 	return
+		// }
+		// if(!Interface.Cache.isRegistered){
+		// 	$('.ui.modal.tiny.Public .header').text($.i18n.map.welcome)
+		// 	$('.ui.modal.tiny.Public .content p').text($.i18n.map.please_register)
+		// 	$('.ui.modal.tiny.Public').modal('show')
+		// 	_this.purchasing = false
+		// 	return
+		// }
+		
+		// _this.reCalcETHandTMX(function(err){
+		// 	if(err){
+		// 		return
+		// 	}
+		// 	currentPurchasEth = _this.calcedEth
+		// 	currentPurchasTMX = _this.calcedTMX
+		// 	if(currentPurchasEth.isLessThan(BN('0.1')) || currentPurchasEth.isGreaterThan(BN("30"))){
+		// 		$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+		// 		$('.ui.modal.tiny.Public .content p').text($.i18n.map.purchas_limit)
+		// 		$('.ui.modal.tiny.Public').modal('show')
+		// 		_this.purchasing = false
+		// 		return
+		// 	}		
+		// 	initPurchase().then(function(data){
+		// 		if(data.balance.dividedBy(1e18).isLessThan(data.TMXToDestory)){
+		// 			$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+		// 			$('.ui.modal.tiny.Public .content p').text($.i18n.map.tmxNotEnough)
+		// 			$('.ui.modal.tiny.Public').modal('show')
+		// 			_this.purchasing = false
+		// 			return
+		// 		}else if(data.allowance.dividedBy(1e18).isLessThan(data.TMXToDestory)){
+		// 			_this.newApprove().then(function(){
+		// 				processPurchase()
+		// 			},function(){
+
+		// 			})
+		// 		}else {
+		// 			processPurchase()
+		// 		}
+		// 	})
+		// })
+		var currentPurchasEth
+		function validatePurchas(){
+			return Interface.Bridges.Metamask.contracts.LuckyStars.read('isBuyable',[BN(_this.keys).multipliedBy(1e18).toString()]).then(function(data){ 
+				return Promise.resolve(data.toNumber())
+			},function(err){
+				return Promise.reject()
+			})
+		}
 		function processPurchase(){
 			Interface.Bridges.Metamask.contracts.LuckyStars.write('buy',[],undefined,{value:currentPurchasEth.multipliedBy(_this.fullUnit).toFixed(0).toString() }).then(function(){
 				_this.purchasing = false
@@ -153,35 +249,19 @@
 				_this.purchasing = false
 			})
 		}
-		function initPurchase(){
-			var allowance,balance,TMXToDestory = currentPurchasTMX
-			return Promise.all([_this.getAllowance(),_this.getBalanceOfMe()]).then(function(data){
-				allowance = BN(data[0])
-				balance = BN(data[1])
-				return new Promise(function(res,rej){
-					res({
-						allowance:allowance,
-						balance:balance,
-						TMXToDestory:TMXToDestory
-					})
-				})
-			},function(err){
-				Interface.UI.trigger('GraceError',err)
-			})
-		}
-		var currentPurchasEth,currentPurchasTMX
 		if(_this.purchasing){
-			$('.ui.modal.tiny.Public .header').text("提示")
-			$('.ui.modal.tiny.Public .content p').text("正在处理当前购买！")
-			$('.ui.modal.tiny.Public').modal('show')
-			return
-		}
+		 	$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+		 	$('.ui.modal.tiny.Public .content p').text($.i18n.map.process_purchasing)
+		 	$('.ui.modal.tiny.Public').modal('show')
+		 	return
+		 }
 		_this.purchasing = true
 		
 		if(_this.calcing){
 			_this.purchasing = false
 			return
 		}
+
 		if(!Interface.Cache.isRegistered){
 			$('.ui.modal.tiny.Public .header').text($.i18n.map.welcome)
 			$('.ui.modal.tiny.Public .content p').text($.i18n.map.please_register)
@@ -189,39 +269,70 @@
 			_this.purchasing = false
 			return
 		}
-		
 		_this.reCalcETHandTMX(function(err){
 			if(err){
+				_this.purchasing = false
 				return
 			}
 			currentPurchasEth = _this.calcedEth
-			currentPurchasTMX = _this.calcedTMX
 			if(currentPurchasEth.isLessThan(BN('0.1')) || currentPurchasEth.isGreaterThan(BN("30"))){
-				$('.ui.modal.tiny.Public .header').text("提示")
-				$('.ui.modal.tiny.Public .content p').text("支付的ETH在0.1ETH-30ETH之间！")
+				$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+				$('.ui.modal.tiny.Public .content p').text($.i18n.map.purchas_limit)
 				$('.ui.modal.tiny.Public').modal('show')
 				_this.purchasing = false
 				return
-			}		
-			initPurchase().then(function(data){
-				if(data.balance.isLessThan(data.TMXToDestory)){
-					$('.ui.modal.tiny.Public .header').text("提示")
-					$('.ui.modal.tiny.Public .content p').text("TMX余额不足！")
-					$('.ui.modal.tiny.Public').modal('show')
-					_this.purchasing = false
-					return
-				}else if(data.allowance.isLessThan(data.TMXToDestory)){
+			}
+			// 确认可以发起交易
+			validatePurchas().then(function(signal){			
+				switch(signal){
+					case 1:
+					processPurchase()
+					break;
+					case 2:
 					_this.newApprove().then(function(){
 						processPurchase()
 					},function(){
 
 					})
-				}else {
-					processPurchase()
+					break;
+					case 3:
+					case 4:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.tmxNotEnough)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.purchasing = false
+					break;
+					case 5:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.prompterNotPurchas)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.purchasing = false
+					break;
+					case 6:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.gameNotReady)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.purchasing = false
+					break;
+					case 7:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.purchas_limit)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.purchasing = false
+					break;
+					case 8:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.ethNotEnought)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.purchasing = false
+					break;
 				}
+			},function(){
+				Interface.UI.trigger('GraceError',$.i18n.map.networkCash)
+				_this.purchasing = false
 			})
+
 		})
-		
 
 	}
 	_this.reverse = function(){
@@ -295,7 +406,7 @@
 			_this.TMXprice = (BN(1)).dividedBy(data)
 			_this.update()
 		},function(err){
-			Interface.UI.trigger('GraceWarning',err)
+			Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 		})
 	}
 	// 生命周期
@@ -383,10 +494,10 @@ Subpage-purchase {
 .send-eth.ui.grid {
 	margin-top: 1.5rem;
 }
-.send-eth.ui.grid .ui.button {
+.send-eth.ui.grid .ui.button.blue {
 	font-size: 1.25rem;
-	line-height: 1.5;
-	padding: .375rem .75rem;
+	line-height: 3rem;
+	padding: 0;
 	border-radius: .25rem;
 }
 .ui.blue.button.fluid,.ui.blue.button.fluid:hover,.ui.blue.button.fluid:active,.ui.blue.button.fluid:focus {

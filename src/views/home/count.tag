@@ -2,17 +2,18 @@
 
 <count>
 	<div class="ui grid">
+		<i class="ui icon database massive backicon"></i>
 		<div class="eight wide computer eight wide tablet six wide mobile column left aligned" data-translate="round_benfit_whole">
 			이번 누적수익
 		</div>
 		<div class="eight wide computer eight wide tablet ten wide mobile column right aligned gracefulText">
-			0.00000 ETH
+			{ ethDeployedAmount.toFixed(5) } ETH
 		</div>
 		<div class="eight wide computer eight wide tablet six wide mobile column left aligned" data-translate="pool_rounds_amount">
 			상금풀 누적총량
 		</div>
 		<div class="eight wide computer eight wide tablet ten wide mobile column right aligned gracefulText">
-			0.00000 ETH
+			{ rewardHistoryAmount.toFixed(5) } ETH
 		</div>
 		<div class="eight wide computer eight wide tablet six wide mobile column left aligned" data-translate="pool_current_amount">
 			상금풀 현재총량
@@ -24,13 +25,13 @@
 			배당총량
 		</div>
 		<div class="eight wide computer eight wide tablet ten wide mobile column right aligned gracefulText">
-			0.00000 ETH
+			{ ethDeployedAmount.multipliedBy(0.3).toFixed(5) } ETH
 		</div>
 		<div class="eight wide computer eight wide tablet six wide mobile column left aligned" data-translate="keys_destoryed">
 			소멸된 입장권
 		</div>
 		<div class="eight wide computer eight wide tablet ten wide mobile column right aligned gracefulText">
-			{ burnAmount.toFixed(5) } TMX
+			{ TMXburnedAmount.toFixed(5) } TMX
 		</div>
 		<div class="eight wide computer eight wide tablet six wide mobile column left aligned" data-translate="keys_amount">
 			key 총량
@@ -53,34 +54,21 @@
 	// 属性
 	_this.poolWhole = BN(0)
 	_this.keysAmount = BN(0)
-	_this.burnAmount = BN(0)
+	_this.ethDeployedAmount = BN(0)
+	_this.TMXburnedAmount = BN(0)
+	_this.rewardHistoryAmount = BN(0)
 
 	// 事件
 	Interface.UI.on('currentRoundInfo',function(currentRoundInfo){
 		_this.poolWhole = currentRoundInfo.poolWhole.dividedBy(1e18)
 		_this.keysAmount = currentRoundInfo.keysAmount.dividedBy(1e18)
-	})
-	Interface.Bridges.Metamask.on('account.signedIn',function(){
-		_this.initCount()
-	})
-	Interface.Bridges.Websocket.contracts.TMX.on('Event',function(event){
-		var isMe = (event.returnValues.from.toLowerCase() == Interface.Bridges.Metamask._lastWallet.toLowerCase())
-		if(event.event == 'Transfer' && isMe){
-			// 暂时性处理
-			_this.initCount()
-			
-		}
+		_this.ethDeployedAmount = currentRoundInfo.ethDeployedAmount.dividedBy(1e18)
+		_this.TMXburnedAmount = currentRoundInfo.TMXburnedAmount.dividedBy(1e18)
+		_this.rewardHistoryAmount = currentRoundInfo.rewardHistoryAmount.dividedBy(1e18)
 	})
 	// 方法
 	_this.getBurnAmount = function(){
 		return Interface.Bridges.Metamask.contracts.Payment.read('getBurnAmount',[Interface.Bridges.Metamask._lastWallet])
-	}
-	_this.initCount = function(){
-		Promise.all([_this.getBurnAmount()]).then(function(dataArray){
-			_this.burnAmount = BN(dataArray[0]).dividedBy(_this.fullUnit)
-		},function(err){
-			Interface.UI.trigger('GraceWarning',err)
-		})
 	}
 	_this.timeAmount = function(){
 		var staticAmount = 6*60*60
@@ -95,9 +83,7 @@
 
 	// 生命周期
 	this.on('mount',function(){
-		if(Interface.Bridges.Metamask.signedIn){
-			_this.initCount()
-		}
+		
 	})
 </script>
 <style>
@@ -115,6 +101,9 @@
 }
 .ui.grid p {
 	margin: 0;
+}
+.ui.grid .backicon{
+	padding: 0;
 }
 .ui.grid p:first-child {
 	font-size: 2rem;

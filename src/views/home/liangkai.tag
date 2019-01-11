@@ -1,7 +1,8 @@
 // 量开
 <liangkai>
 	<div class="ui segment">
-		<h4 class="ui header"><span data-translate="liangkai">에너지 단계</span><i class="question circle outline icon"></i></h4>
+		<i class="ui icon cubes massive backicon"></i>
+		<h4 class="ui header"><span data-translate="liangkai">에너지 단계</span> - { currentStage.toNumber() }<i class="question circle outline icon"></i></h4>
 		<div class="bordergroup one"></div>
 		<div class="bordergroup two"></div>
 		<p class="tips" data-translate="pool_whole">상금풀 현재총량</p>
@@ -12,7 +13,7 @@
 					<i class="icon ethereum big"></i>
 				</p>
 				<p style="white-space: nowrap">
-					<span data-translate="next_count_leaves">다음발표 남은시간</span> 0.00000 ETH
+					<span data-translate="next_count_leaves">다음발표 남은시간</span> { instanceBeforeNext.toFixed(5) } ETH
 				</p>
 			</div>
 			<div class="eight wide column">
@@ -111,14 +112,17 @@
 		_this.mixin('BNMix')
 	// 属性
 	_this.poolWhole = BN(0)
-
+	_this.stageInfo = [300000000000000000,300000000000000000,300000000000000000,300000000000000000,300000000000000000,300000000000000000,300000000000000000,300000000000000000]
+	_this.instanceBeforeNext = BN(0)
+	_this.currentStage = BN(0)
 	// 事件
 	Interface.UI.on('currentRoundInfo',function(currentRoundInfo){
 		_this.poolWhole = currentRoundInfo.poolWhole.dividedBy(_this.fullUnit)
+		_this.instanceBeforeNext = BN(_this.stageInfo[currentRoundInfo.currentStage.toNumber()-1]).dividedBy(_this.fullUnit).minus(_this.poolWhole)
+		_this.currentStage = currentRoundInfo.currentStage
 	})
 
 	// 方法
-	
 
 	// 生命周期
 	this.on('mount',function(){
@@ -130,7 +134,7 @@
 <style>
 liangkai {
 	white-space: nowrap;
-} 
+}
 h4.ui.header {
 	font-size: 1.35rem;
 	font-weight: normal;

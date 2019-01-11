@@ -51,8 +51,10 @@
                     Interface.Bridges.Metamask.web3.version.getNetwork(function (r, e) {
                         if (r) return rej(r)
                         if (e == "4") {
+
                             return res(true)
                         } else {
+
                             return res(false)
                         }
                     })

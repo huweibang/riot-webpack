@@ -60,7 +60,7 @@
 		Interface.Bridges.Metamask.contracts.LuckyStars.read('getTimeLeft').then(function(data){
 			$('div#countdown,span#countdown-shikai,.countdown-small').countdown(new Date().setSeconds(new Date().getSeconds()+data.toNumber())).countdown('start')
 		},function(err){
-			Interface.UI.trigger('GraceWarning',err)
+			Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 		})
 	}
 	// 生命周期
@@ -78,7 +78,7 @@
 			_this.currentRound = data.toNumber()
 			_this.update()
 		},function(err){
-			Interface.UI.trigger('GraceWarning',err)
+			Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 		})
 	})
 </script>

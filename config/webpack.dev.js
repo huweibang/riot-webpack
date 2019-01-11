@@ -10,7 +10,8 @@ module.exports = merge(common, {
 		inline:true,
 		hot:true,
 		historyApiFallback:true,
-		quiet:true
+		quiet:true,
+		host:'192.168.14.216'
 	},
 	plugins: [
 

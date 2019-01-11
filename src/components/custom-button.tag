@@ -1,5 +1,13 @@
 <custom-button>
-	<div class="{custom-button:true,animated:opts.animated}"><yield /></div>
+	<div class="{custom-button:true,animated:opts.animated}">
+		<yield />
+	</div>
+	<script>
+		var _this = this
+		this.on('mount',function(){
+			
+		})
+	</script>
 	<style>
 	.custom-button {
 		display: block;

@@ -170,7 +170,6 @@
                 if (!this.bridge.web3.version.includes("1.")) throw "InvalidVersion: This version of web3js does not support events"
                 if (this.listeners.ws) this.listeners.ws.unsubscribe()
                 try {
-                    console.log("Setting up event listeners..")
                     this.listeners.ws = this.API.events.allEvents(function (err, event, sub) {
                         console.log("incoming..")
                         var tt = typeof err

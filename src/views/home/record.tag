@@ -2,6 +2,7 @@
 <record>
 	<h4 class="ui header" data-translate="purchas_record">내역</h4>
 	<div class="record-table">
+		<i class="ui icon shopping cart massive backicon"></i>
 		<div class={ ui:true,dimmer:true,active:masking}>
 				<div class="content">
 					<img class="loading_trip" src={ loading_trip } if={ Interface.Cache.isRegistered && recordLoaded }/>
@@ -9,15 +10,14 @@
 				</div>
 			</div>
 		<div class="ui grid">
-			<div class="row" class="table-header">
+			<div class="row table-header">
 				<div class="seven wide computer seven wide tablet five wide mobile column" data-translate="purchas_date">구입일자</div>
 				<div class="three wide computer three wide tablet four wide mobile column">Key</div>
 				<div class="three wide computer three wide tablet four wide mobile column">TMX</div>
 				<div class="three wide computer three wide tablet three wide mobile column">ETH</div>
 			</div>
 		</div>
-		<div class="scroll-wrapper" ref="scroll_wrapper">
-			
+		<div class="scroll-wrapper" ref="scroll_wrapper">	
 			<div class="ui grid">
 				<div class="row" each={ item in purchaseRecord.sort(dateSorter) }>
 					<div class="seven wide computer seven wide tablet five wide mobile column">{ dateFormate(item.timestamp) }</div>
@@ -50,8 +50,7 @@
 		_this.getRecord()
 	})
 	Interface.Bridges.Websocket.contracts.LuckyStars.on('Event',function(event){
-		var isMe = (event.returnValues.player.toLowerCase() == Interface.Bridges.Metamask._lastWallet.toLowerCase())
-		if(event.event == 'LogBuy' && isMe){
+		if(event.event == 'LogBuy' && (event.returnValues.player.toLowerCase() == Interface.Bridges.Metamask._lastWallet.toLowerCase())){
 			// 更新购买记录
 			_this.purchaseRecord.push({
 				timestamp:event.returnValues['time'],
@@ -62,8 +61,14 @@
 		}
 	})
 	// 方法
+	_this.randomColor = function(){
+		var r = Math.floor(Math.random()*256)-1
+		var g = Math.floor(Math.random()*256)-1
+		var b = Math.floor(Math.random()*256)-1
+		return 'rgb('+ r +','+ g +','+ b +')'
+	}
 	_this.dateSorter = function(a,b){
-		return a.timestamp - b.timestamp
+		return b.timestamp - a.timestamp
 	}
 	_this.getDimmerContent = function(){
 		if(Interface.Cache.isRegistered){
@@ -113,10 +118,10 @@
 				_this.recordLoading = false
 				_this.update()
 			},function(err){
-				Interface.UI.trigger('GraceWarning',err)
+				Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 			})
 		},function(err){
-			Interface.UI.trigger('GraceWarning',err)
+			Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 		})
 	}
 	_this.getPastLogs = function(){
@@ -151,16 +156,24 @@ h4.ui.header {
 	font-weight: normal;
 	color: white;
 }
+
 .record-table {
 	position: relative;
+	background: #1d1c3a;
+	line-height: 2em;
+	border-radius: 4px;
+	overflow: hidden;
+}
+.table-header {
+	border-bottom: 1px solid #21203f;
 }
 .scroll-wrapper {
-	background: #1d1c3a;
-	height: 22.97rem;
+	height: calc(24.8rem - 2em);
 	font-size: 1.15rem;
 	overflow-x: hidden;
 	overflow-y: auto;
 	position: relative;
+	color: #caccf7;
 }
 .record-table .ui.grid {
 	margin: 0;

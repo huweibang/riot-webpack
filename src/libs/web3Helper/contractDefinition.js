@@ -2,7 +2,7 @@
 module.exports = {
 	Register:{
 		name:'Register',
-		address:"0x3fb5db410ed906938c5999218363bf63ef5a9d5a",
+		address:"0x3FB5dB410ed906938c5999218363BF63EF5a9D5A",
 		ABI:[
 		{
 			"constant": true,
@@ -216,198 +216,198 @@ module.exports = {
 	},
 	Payment:{
 		name:'Payment',
-		address:"0x8241f7509166a8132dfe0de8aa24ece6fee966af",
+		address:"0x9f6e97958E5E095ADf8741C473D2F5105E286111",
 		ABI:[
 		{
-			"constant":  false,
-			"inputs":  [
+			"constant": false,
+			"inputs": [
 			{
-				"name":  "_stop",
-				"type":  "bool"
+				"name": "_stop",
+				"type": "bool"
 			}
 			],
-			"name":  "pause",
-			"outputs":  [
+			"name": "pause",
+			"outputs": [
 			{
-				"name":  "success",
-				"type":  "bool"
+				"name": "success",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [],
-			"name":  "terminate",
-			"outputs":  [
+			"constant": false,
+			"inputs": [],
+			"name": "terminate",
+			"outputs": [
 			{
-				"name":  "success",
-				"type":  "bool"
+				"name": "success",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [
+			"constant": false,
+			"inputs": [
 			{
-				"name":  "_from",
-				"type":  "address"
+				"name": "_from",
+				"type": "address"
 			},
 			{
-				"name":  "_amount",
-				"type":  "uint256"
+				"name": "_amount",
+				"type": "uint256"
 			}
 			],
-			"name":  "BurnFrom",
-			"outputs":  [
+			"name": "BurnFrom",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "bool"
+				"name": "",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "pause_",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "pause_",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "bool"
+				"name": "",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "stopFlag_",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "stopFlag_",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "bool"
+				"name": "",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "TO",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "TO",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "address"
+				"name": "",
+				"type": "address"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [],
-			"name":  "renounceOwnership",
-			"outputs":  [],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"constant": false,
+			"inputs": [],
+			"name": "renounceOwnership",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [],
-			"name":  "acceptOwnership",
-			"outputs":  [],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"constant": false,
+			"inputs": [],
+			"name": "acceptOwnership",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "owner",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "owner",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "address"
+				"name": "",
+				"type": "address"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [
+			"constant": false,
+			"inputs": [
 			{
-				"name":  "_LS",
-				"type":  "address"
+				"name": "_LS",
+				"type": "address"
 			}
 			],
-			"name":  "setLS",
-			"outputs":  [],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"name": "setLS",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "LuckeyStars_",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "LuckeyStars_",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "address"
+				"name": "",
+				"type": "address"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [
+			"constant": true,
+			"inputs": [
 			{
-				"name":  "_user",
-				"type":  "address"
+				"name": "_user",
+				"type": "address"
 			}
 			],
-			"name":  "getBurnAmount",
-			"outputs":  [
+			"name": "getBurnAmount",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "uint256"
+				"name": "",
+				"type": "uint256"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "newOwner",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "newOwner",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "address"
+				"name": "",
+				"type": "address"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function" 
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
 			"constant": true,
@@ -453,7 +453,7 @@ module.exports = {
 			"outputs": [
 			{
 				"name": "",
-				"type": "bool"
+				"type": "uint8"
 			}
 			],
 			"payable": false,
@@ -577,7 +577,7 @@ module.exports = {
 	},
 	TMX:{
 		name:'TMX',
-		address:"0x9d6f24c15f2774af9daf30c7ee35b95eaa8f75aa",
+		address:"0x9d6f24c15f2774Af9Daf30C7eE35B95Eaa8f75Aa",
 		ABI:[
 		{
 			"constant":  true,
@@ -1081,24 +1081,47 @@ module.exports = {
 	},
 	LuckyStars:{
 		name:'LuckyStars',
-		address:"0x18042101f4b98560e86a10025c94a0bba12b5b65",
+		address:"0x5fd3b23bfc000d6e1c54ff1e7876bead0fb4af54",
 		ABI:[
 		{
-			"constant": false,
+			"constant": true,
 			"inputs": [],
-			"name": "activate",
-			"outputs": [],
+			"name": "getBuyPrice",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
 			"payable": false,
-			"stateMutability": "nonpayable",
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
-			"constant": false,
-			"inputs": [],
-			"name": "buy",
-			"outputs": [],
-			"payable": true,
-			"stateMutability": "payable",
+			"constant": true,
+			"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"name": "rque_",
+			"outputs": [
+			{
+				"name": "plynum",
+				"type": "uint256"
+			},
+			{
+				"name": "off20",
+				"type": "uint256"
+			},
+			{
+				"name": "off50",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -1116,12 +1139,529 @@ module.exports = {
 			"type": "function"
 		},
 		{
+			"constant": true,
+			"inputs": [],
+			"name": "name",
+			"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "activate",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"name": "round_",
+			"outputs": [
+			{
+				"name": "plyr",
+				"type": "address"
+			},
+			{
+				"name": "strt",
+				"type": "uint256"
+			},
+			{
+				"name": "end",
+				"type": "uint256"
+			},
+			{
+				"name": "ended",
+				"type": "bool"
+			},
+			{
+				"name": "keys",
+				"type": "uint256"
+			},
+			{
+				"name": "eth",
+				"type": "uint256"
+			},
+			{
+				"name": "pot",
+				"type": "uint256"
+			},
+			{
+				"name": "mask",
+				"type": "uint256"
+			},
+			{
+				"name": "phase",
+				"type": "uint256"
+			},
+			{
+				"name": "award",
+				"type": "uint256"
+			},
+			{
+				"name": "tmx",
+				"type": "uint256"
+			},
+			{
+				"name": "pothst",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"name": "awrdIn_",
+			"outputs": [
+			{
+				"name": "off20",
+				"type": "uint256"
+			},
+			{
+				"name": "off50",
+				"type": "uint256"
+			},
+			{
+				"name": "winner",
+				"type": "uint256"
+			},
+			{
+				"name": "pot",
+				"type": "uint256"
+			},
+			{
+				"name": "ended",
+				"type": "bool"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_player",
+				"type": "address"
+			}
+			],
+			"name": "getWinVaults",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
 			"constant": false,
 			"inputs": [],
 			"name": "withdraw",
 			"outputs": [],
 			"payable": false,
 			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"name": "plyrRnds_",
+			"outputs": [
+			{
+				"name": "eth",
+				"type": "uint256"
+			},
+			{
+				"name": "keys",
+				"type": "uint256"
+			},
+			{
+				"name": "mask",
+				"type": "uint256"
+			},
+			{
+				"name": "closed",
+				"type": "bool"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "rID_",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getCurrentRoundInfo",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "aID_",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "symbol",
+			"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_player",
+				"type": "address"
+			}
+			],
+			"name": "getPlayerAffValue",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256[13]"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "buy",
+			"outputs": [],
+			"payable": true,
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+			],
+			"name": "plyr_",
+			"outputs": [
+			{
+				"name": "win",
+				"type": "uint256"
+			},
+			{
+				"name": "gen",
+				"type": "uint256"
+			},
+			{
+				"name": "aff",
+				"type": "uint256"
+			},
+			{
+				"name": "bon",
+				"type": "uint256"
+			},
+			{
+				"name": "bnk",
+				"type": "uint256"
+			},
+			{
+				"name": "lrnd",
+				"type": "uint256"
+			},
+			{
+				"name": "lphs",
+				"type": "uint256"
+			},
+			{
+				"name": "eth",
+				"type": "uint256"
+			},
+			{
+				"name": "withdraw",
+				"type": "uint256"
+			},
+			{
+				"name": "dref",
+				"type": "address"
+			},
+			{
+				"name": "dinv",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getTimeLeft",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_rID",
+				"type": "uint256"
+			},
+			{
+				"name": "_eth",
+				"type": "uint256"
+			}
+			],
+			"name": "calcKeysReceived",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_keys",
+				"type": "uint256"
+			}
+			],
+			"name": "iWantXKeys",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "airDropPot_",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_keys",
+				"type": "uint256"
+			}
+			],
+			"name": "isBuyable",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint8"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_player",
+				"type": "address"
+			}
+			],
+			"name": "getPlayerInfoByAddress",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"name": "airIn_",
+			"outputs": [
+			{
+				"name": "win",
+				"type": "uint256"
+			},
+			{
+				"name": "addr",
+				"type": "uint256"
+			},
+			{
+				"name": "time",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -1290,7 +1830,7 @@ module.exports = {
 			},
 			{
 				"indexed": true,
-				"name": "lucky",
+				"name": "player",
 				"type": "address"
 			},
 			{
@@ -1306,398 +1846,6 @@ module.exports = {
 			],
 			"name": "LogAirdrop",
 			"type": "event"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_rID",
-				"type": "uint256"
-			},
-			{
-				"name": "_eth",
-				"type": "uint256"
-			}
-			],
-			"name": "calcKeysReceived",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "getBuyPrice",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "getCurrentRoundInfo",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "address"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_player",
-				"type": "address"
-			}
-			],
-			"name": "getPlayerAffValue",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256[13]"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_player",
-				"type": "address"
-			}
-			],
-			"name": "getPlayerInfoByAddress",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "getTimeLeft",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_keys",
-				"type": "uint256"
-			}
-			],
-			"name": "iWantXKeys",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "name",
-			"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-			],
-			"name": "plyr_",
-			"outputs": [
-			{
-				"name": "win",
-				"type": "uint256"
-			},
-			{
-				"name": "gen",
-				"type": "uint256"
-			},
-			{
-				"name": "aff",
-				"type": "uint256"
-			},
-			{
-				"name": "bon",
-				"type": "uint256"
-			},
-			{
-				"name": "bnk",
-				"type": "uint256"
-			},
-			{
-				"name": "lrnd",
-				"type": "uint256"
-			},
-			{
-				"name": "lphs",
-				"type": "uint256"
-			},
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "withdraw",
-				"type": "uint256"
-			},
-			{
-				"name": "dref",
-				"type": "address"
-			},
-			{
-				"name": "dinv",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"name": "plyrRnds_",
-			"outputs": [
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "keys",
-				"type": "uint256"
-			},
-			{
-				"name": "mask",
-				"type": "uint256"
-			},
-			{
-				"name": "closed",
-				"type": "bool"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "rID_",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"name": "round_",
-			"outputs": [
-			{
-				"name": "plyr",
-				"type": "address"
-			},
-			{
-				"name": "strt",
-				"type": "uint256"
-			},
-			{
-				"name": "end",
-				"type": "uint256"
-			},
-			{
-				"name": "ended",
-				"type": "bool"
-			},
-			{
-				"name": "keys",
-				"type": "uint256"
-			},
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "pot",
-				"type": "uint256"
-			},
-			{
-				"name": "mask",
-				"type": "uint256"
-			},
-			{
-				"name": "phase",
-				"type": "uint256"
-			},
-			{
-				"name": "award",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"name": "rque_",
-			"outputs": [
-			{
-				"name": "plynum",
-				"type": "uint256"
-			},
-			{
-				"name": "off20",
-				"type": "uint256"
-			},
-			{
-				"name": "off50",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "symbol",
-			"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
 		}
 		]
 	}

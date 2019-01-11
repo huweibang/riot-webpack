@@ -22,6 +22,13 @@ body .bg {
 	right: 0;
 	z-index: -1;
 }
+.backicon {
+	position: absolute;
+	right: 50%;
+	top: 50%;
+	transform: translate(50%,-50%);
+	color: rgba(84, 75, 154, 0.1);
+}
 .ui.attached.segment.tab{
 	background: #21203f;
 	color: white;
@@ -69,7 +76,8 @@ body .bg {
 	border-color: #21203f;
 	color: white;
 	font-weight: 400;
-	border-radius: 0;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 }
 .ui.tiny.modal.register>.content {
 	background: #1d1c3a;
@@ -78,10 +86,13 @@ body .bg {
 .ui.tiny.modal.register .label {
 	color: white;
 	font-weight: 400;
+	text-align: left;
 }
 .ui.tiny.modal.register {
 	border: none;
-	border-radius: 0;
+}
+.ui.tiny.modal.register .content{
+	text-align: left;
 }
 .ui.form .field .prompt.label {
 	font-weight: 400;
@@ -109,9 +120,9 @@ h2.ui.header {
 }
 .ui.attached.tabular.menu [data-tab]{
 	max-width: 33.3%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .ui.menu.tabular.menu .item.active{
 	text-shadow: 0 0 5px #02E5D1, 0 0 20px #4391FD, 0 0 10px #4391FD;
@@ -119,20 +130,62 @@ h2.ui.header {
 .tiny.ui.modal {
 	background:#21203f;
 }
+.my-toast.toastify {
+	max-width: calc(100% - 4rem);
+	min-width: 30%;
+	text-shadow: 0px 0px 5px black;
+}
+.my-toast.toastify .toast-close {
+	float: right;
+}
+.tiny.ui.modal .back-icon {
+	position: absolute;
+	z-index: 0;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	color: rgba(84, 75, 154, 0.08);
+}
 .ui.tiny.modal .header {
 	background: #21203f;
 	color: white;
+	font-weight: 400;
 }
 .tiny.ui.modal .content {
-	background: #1d1c3a;
-	color: #caccf7;
+	text-align: center;
+	color: white;
+	background: #21203f;
 }
 .tiny.ui.modal .content input {
-	border-color: #02e4d1;
+	border-color: #1d1c3a;
 }
 .tiny.ui.modal .actions {
 	background: #21203f;
 }
+.ui.button.graceButton {
+	color: white;
+	font-weight: 400;
+	background: linear-gradient(90deg, rgb(2, 229, 209) 0%, rgb(67, 145, 253) 100%);
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	animation: custom-button-anime 0.75s infinite;
+	border: none;
+	outline: none;
+	font-size: 1.25rem;
+	padding: 0;
+	line-height: 3rem;
+	margin: 0;
+}
+@keyframes custom-button-anime {
+		0% {
+			box-shadow: 0 0 0 0 rgba(2, 228, 209, 0.8);
+		}
+		70% {
+			box-shadow: 0 0 0 5px rgba(2, 228, 209, 0.3);
+		}
+		100% {
+			box-shadow: 0 0 0 10px rgba(2, 228, 209, 0);
+		}
+	}
 @media only screen and (max-width: 320px) {
 	body .bg {
 		background-size: 300%;

@@ -14,11 +14,9 @@ import './views/home/purchas.tag'
 import './views/home/record.tag'
 import './views/home/round.tag'
 import './components/header.tag'
-import './components/custom-button.tag'
 import './components/null.tag'
 import './components/register-modal.tag'
 import './components/pendingLine.tag'
-import './components/graceTopHeader.tag'
 import '@babel/polyfill'
 import './i18n/jquery-i18n-properties.js'
 import './i18n/lang_zh.properties'
@@ -28,6 +26,8 @@ import './i18n/lang_en.properties'
 import '../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js'
 import '../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css'
 import contractsDetails from './libs/web3Helper/contractDefinition.js'
+import Toastify from 'toastify-js'
+import BN from 'bignumber.js'
 const Ethereum = require('./libs/web3Helper/contractsHelper.js')
 window.Interface = require('./libs/web3Helper/contractInterface.js')
 require('jquery-countdown')
@@ -63,6 +63,7 @@ $(async function(){
 			name: "Websocket",
 			// API: new Web3(new Web3.providers.WebsocketProvider("wss://rinkeby.infura.io/_ws"))
 			API: new Web3(new Web3.providers.WebsocketProvider("wss://rinkeby.infura.io/_ws"))
+			// API: new Web3(new Web3.providers.WebsocketProvider("ws://192.168.14.86:8546"))
 		}
 		],
 		contracts: [
@@ -123,24 +124,72 @@ $(async function(){
 		console.log('LSEvent',event)
 	})
 	//大量的游戏事件trigger
+	function toastHandler(text,backgroundColor){
+		Toastify({
+			text: text,
+			duration: 3000,
+			newWindow: true,
+			close: true,
+			gravity: "bottom",
+			positionLeft: false,
+			backgroundColor: backgroundColor,
+			className: "my-toast"
+		}).showToast();
+	}
 	Interface.Bridges.Websocket.contracts.LuckyStars.on('Event',function(event){
+		var winner = event.returnValues.winner
+		var player = event.returnValues.player
+		var isMe = [ winner,player ].some(function(e,i){
+			if(e){
+				return e.toLowerCase() == Interface.Bridges.Metamask._lastWallet
+			}else {
+				return false
+			}
+		})
 		switch(event.event){
 			case 'LogAirdrop':
-			Interface.UI.trigger('Airdrop')
+			Interface.UI.trigger('Airdrop',isMe,player)
+			if(isMe){
+				toastHandler($.i18n.map.airdrop_me,"linear-gradient(to right, orange ,yellow)")
+			}else {
+				toastHandler($.i18n.map.airdrop.replace('{0}',player),"linear-gradient(to right, orange ,yellow)")
+			}
 			break;
 			case 'LogTimeEndRound':
-			Interface.UI.trigger('TimeEndRound')
+			Interface.UI.trigger('TimeEndRound',isMe,winner)
+			if(isMe){
+				toastHandler($.i18n.map.timeEnd_me,'#508ff6')
+			}else {
+				toastHandler($.i18n.map.timeEnd.replace('{0}',winner),'#508ff6')
+			}
+			break;
+			case 'LogQuantityEndRound':
+			Interface.UI.trigger('QuantityEndRound',isMe,winner)
+			if(isMe){
+				toastHandler($.i18n.map.quantityEndRound_me,'#04e3d2')
+			}else {
+				toastHandler($.i18n.map.quantityEndRound.replace('{0}',winner),'#04e3d2')
+			}
 			break;
 			case 'LogQuantityAward':
-			Interface.UI.trigger('QuantityAward')
+			Interface.UI.trigger('QuantityAward',isMe,winner)
+			if(isMe){
+				toastHandler($.i18n.map.quantityAward_me,'#04e3d2')
+			}else {
+				toastHandler($.i18n.map.quantityAward.replace('{0}',winner),'#04e3d2')
+			}
 			break;
 			case 'LogWithdraw':
-			Interface.UI.trigger('Withdraw')
+			Interface.UI.trigger('Withdraw',isMe,player,BN(event.returnValues.eth).dividedBy(1e18))
+			if(isMe){
+				toastHandler($.i18n.map.withdraw_me.replace('{0}',BN(event.returnValues.eth).dividedBy(1e18).toFixed(1)),"linear-gradient(to right, orange ,yellow)")
+			}else {
+				toastHandler($.i18n.map.withdraw.replace('{0}',player).replace('{1}',BN(event.returnValues.eth).dividedBy(1e18).toFixed(1)),"linear-gradient(to right, orange ,yellow)")
+			}
 			break;
 		}
 	})
 	require('./router.js')
-	
 })
 
 

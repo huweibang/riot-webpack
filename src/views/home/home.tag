@@ -9,6 +9,7 @@
 		</div>
 	</div>
 	<div class="ui modal tiny Public">
+		<i class="icon ethereum massive back-icon"></i>
 		<div class="header"></div>
 		<div class="content">
 			<p></p>
@@ -38,7 +39,7 @@
 			</div>
 		</div>
 		<div class="purchase-key">
-			<custom-button animated={ true }>
+			<button class="ui button graceButton fluid btn-10keys" onclick={ buy10Keys }>
 				<div class="inner-content ui grid">
 					<div class="two wide computer two wide tablet sixteen wide mobile column">
 						<i class="key icon"></i> x10
@@ -50,7 +51,7 @@
 						
 					</div>
 				</div>
-			</custom-button>
+			</button>
 		</div>
 		<div class="ui grid control-panel">
 			<div class="eight wide computer sixteen wide mobile column">
@@ -84,6 +85,7 @@
 		
 	</div>
 	<script>
+		import Toastify from 'toastify-js'
 		var anime = require('animejs')
 		var logo_title = require('../../imgs/logo-title.png')
 		var BN = require('bignumber.js')
@@ -98,6 +100,12 @@
 	Interface.UI.on('Contracts.loaded',function(){
 		riot.mount('module-loading','module-null')
 	})
+	Interface.UI.on('GraceWarning',function(error){
+		_this.toastHandler(error,'#eaae00')
+	})
+	Interface.UI.on('GraceError',function(error){
+		_this.toastHandler(error,'#db2828')
+	})
 	Interface.UI.on('Home.Init.step1',function(){
 		if(Interface.UI.device !== 'mobile'){
 			anime.timeline().add({
@@ -107,7 +115,7 @@
 				scale:[1.05,1],
 				duration:500
 			}).add({
-				targets:'.purchase-key .custom-button',
+				targets:'.purchase-key>.btn-10keys',
 				easing:'easeInOutQuad',
 				opacity:[0,1],
 				scale:[1.05,1],
@@ -129,23 +137,20 @@
 				targets:'.ui.grid.top-panel .ui.segment',
 				easing:'easeInOutQuad',
 				opacity:[0,1],
-				translateY:[100,0],
 				duration:700,
 				delay:function(e,i){
 					return i * 350
 				}
 			}).add({
-				targets:'.purchase-key .custom-button',
+				targets:'.purchase-key>.btn-10keys',
 				easing:'easeInOutQuad',
 				opacity:[0,1],
-				translateY:[50,0],
 				duration:700,
 				offset:-350
 			}).add({
 				targets:'.ui.grid.control-panel',
 				easing:'easeInOutQuad',
 				opacity:[0,1],
-				scale:[1.05,1],
 				duration:500,
 				offset:500,
 				complete:function(){
@@ -155,6 +160,21 @@
 		}
 	})
 	// 方法
+	_this.toastHandler = function(text,backgroundColor){
+		Toastify({
+			text: text,
+			duration: 3000,
+			newWindow: true,
+			close: true,
+			gravity: "bottom",
+			positionLeft: false,
+			backgroundColor: backgroundColor,
+			className: "my-toast"
+		}).showToast();
+	}
+	_this.buy10Keys = function(){
+		Interface.UI.trigger('purchas10Keys')
+	}
 	_this.getCurrentRoundInfo = function(){
 		return Interface.Bridges.Metamask.contracts.LuckyStars.read('getCurrentRoundInfo').then(function(dataArr){
 			return Promise.resolve({
@@ -165,7 +185,9 @@
 				ethDeployedAmount:BN(dataArr[4]),
 				poolWhole:BN(dataArr[5]),
 				ethPer50:BN(dataArr[6]),
-				_lastAddress:dataArr[7],
+				currentStage:BN(dataArr[7]),
+				TMXburnedAmount:BN(dataArr[8]),
+				rewardHistoryAmount:BN(dataArr[9]),
 
 			})
 		},function(err){
@@ -177,7 +199,7 @@
 			Interface.UI.trigger('currentRoundInfo',currentRoundInfo)
 			riot.update()
 		},function(err){
-			Interface.UI.trigger('GraceWarning',err)
+			Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 		})
 		_this.refreshCurrentRoundInfoTimeId = setInterval(function(){
 			_this.countId ++
@@ -188,7 +210,7 @@
 					riot.update()
 				}	
 			},function(err){
-				Interface.UI.trigger('GraceWarning',err)
+				Interface.UI.trigger('GraceWarning',$.i18n.map.networkCash)
 			})
 		}, 1000)
 	}
@@ -240,7 +262,7 @@
 .purchase-key {
 	margin: 4rem 0;
 }
-.purchase-key .custom-button {
+.purchase-key .btn-10keys {
 	opacity: 0;
 }
 .ui.segment {
@@ -261,6 +283,9 @@ span#countdown-shikai {
 .ui.grid.control-panel {
 	min-height: 40.4178rem;
 	opacity: 0;
+}
+.btn-10keys.ui.button {
+	padding: 0 0.75rem;
 }
 .prompt-wrapper {
 	white-space: pre-wrap;
