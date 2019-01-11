@@ -1,29 +1,28 @@
-#商学院电子合同项目源码
+<p align="center"><img src="https://riot.js.org/img/logo/riot240x.png" width="20%"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://webpack.js.org/e0b5805d423a4ec9473ee315250968b2.svg" width="35%"/></p>
 
- 本源码用到的技术有e-charts,jquery,riot.js,riot-route,webpack.
- 
-####打包源码
+# riot-webpack
 
-<pre>
-<code> npm run build</code>
-</pre>
+![](https://img.shields.io/badge/build-ok-green.svg)
+![](https://img.shields.io/badge/npm-notready-red.svg)
+![](https://img.shields.io/badge/license-ISC-blue.svg)
+![](https://img.shields.io/github/repo-size/badges/shields.svg)
 
-注意代码打包后使用的是HTML5单页路由配置，注意配置web服务器的设置已支持HTML HistoryAPI模式
+## 简介:smile:
+这是一个混合式的自建框架，基础部件是webpack和riot.js，延伸的功能部件是jQuery和anime.js以及一系列的基于jQuery和原生javascript扩展出来的插件。UI使用了Semantic UI的构建。
+#### 组件列表
+组件 | 描述
+------------ | -------------
+webpack | 处理和打包工程的有关文件
+riot.js | web框架，负责MVVM绑定、路由、事件机制和全局状态，[Document](https://riot.js.org/)
+jQuery | 在riot.js的基础上增加活处理DOM的jQuery，保证了框架工作的灵活性
+anime.js | 强大的动画库，生成强大动画的捷径，[Document](https://github.com/juliangarnier/anime/)
+... | 其他的插件可以自行添加（基于jQuery和原生javascript）
 
-
-
-####开发
-
-<pre>
-<code> npm start</code>
-</pre>
-
-######目录结构：
-
-
-
-######参考文档:
-
-[riot.js](https://riot.js.org/)
-
-[riot-route](https://riot.js.org/api/route/)
+#### 浏览器支持
+* Chrome
+* Firefox
+* IE(10+)
+* Safari IOS
+* Android
+---
+这个框架自写基本也自用，如果想一起交流的话，@[ZyanWlaoyr](https://github.com/ZyanWlayor)
