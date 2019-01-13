@@ -11,7 +11,7 @@ module.exports = merge(common, {
 		hot:true,
 		historyApiFallback:true,
 		quiet:true,
-		host:'192.168.14.216'
+		host:'localhost'
 	},
 	plugins: [
 

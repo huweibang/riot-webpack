@@ -313,6 +313,16 @@ span#countdown-shikai {
 		.inner-content div:first-child {
 			text-align: center;
 		}
+		.btn-10keys.ui.button {
+			line-height: 2rem;
+			white-space: nowrap;
+		}
+		.btn-10keys.ui.button .inner-content .column.prompt-wrapper{
+			white-space: nowrap;
+			font-size: 1rem;
+			text-align: justify;
+			text-align-last: justify;
+		}
 	}
 	@media only screen and (max-width: 392px) {
 		.ui.header.title {

@@ -7,7 +7,7 @@
 	<div class="content-wrapper">
 		<div class="ui grid">
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="amount">已投入的资金</div>
-			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ ethDeployed.toFixed(5) } ETH</div>
+			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ ethDeployedAmount.toFixed(5) } ETH</div>
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="my_keys">我的钥匙</div>
 			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ keysBuyed.toFixed(0) } Keys</div>
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="keys_destoryed"></div>
@@ -100,6 +100,7 @@
 	_this.burnAmount = BN(0)
 	_this.keysBuyed = BN(0)
 	_this.ethDeployed = BN(0)
+	_this.ethDeployedAmount = BN(0)
 	_this.dividend = BN(0)
 	_this.fallback = BN(0)
 	_this.persionBank = BN(0)
@@ -138,10 +139,11 @@
 	}
 	_this.getPlayerInfoByAddress = function(){
 
-		return Promise.all([Interface.Bridges.Metamask.contracts.LuckyStars.read('getPlayerInfoByAddress',[Interface.Bridges.Metamask._lastWallet]),Interface.Bridges.Metamask.contracts.LuckyStars.read('getWinVaults',[Interface.Bridges.Metamask._lastWallet])]) .then(function(data){
+		return Promise.all([Interface.Bridges.Metamask.contracts.LuckyStars.read('getPlayerInfoByAddress',[Interface.Bridges.Metamask._lastWallet]),Interface.Bridges.Metamask.contracts.LuckyStars.read('getWinVaults',[Interface.Bridges.Metamask._lastWallet]),Interface.Bridges.Metamask.contracts.LuckyStars.read('getPlayerEffectiveValue',[Interface.Bridges.Metamask._lastWallet])]) .then(function(data){
 			return Promise.resolve({
 				keysBuyed:BN(data[0][0]),
-				ethDeployed:BN(data[0][1]),
+				ethDeployed:BN(data[2]),
+				ethDeployedAmount:BN(data[0][1]),
 				dividend:BN(data[0][2]),
 				persionBank:BN(data[0][3]),
 				invite_feedback:BN(data[0][4]),
@@ -179,6 +181,7 @@
 	Interface.UI.on('currentPlayerInfo',function(playerInfo){
 		_this.keysBuyed = playerInfo.keysBuyed.dividedBy(1e18)
 		_this.ethDeployed = playerInfo.ethDeployed.dividedBy(1e18)
+		_this.ethDeployedAmount = playerInfo.ethDeployedAmount.dividedBy(1e18)
 		_this.dividend = playerInfo.dividend.dividedBy(1e18)
 		_this.persionBank = playerInfo.persionBank.dividedBy(1e18)
 		_this.fallback = playerInfo.fallback.dividedBy(1e18)
