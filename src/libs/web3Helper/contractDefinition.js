@@ -1081,90 +1081,90 @@ module.exports = {
 	},
 	LuckyStars:{
 		name:'LuckyStars',
-		address:"0x2df8914f1bf9b0bf1cab2d7bf7ac657abe0fcefc",
+		address:"0x58a91e837d5d3d681b158e34b53e58cacb8bad6b",
 		ABI:[
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "getBuyPrice",
-			"outputs": [
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getBuyPrice",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
 			{
 				"name": "_eth",
 				"type": "uint256"
 			}
-			],
-			"name": "reLoadBuy",
-			"outputs": [],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "name",
-			"outputs": [
+		],
+		"name": "reLoadBuy",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name",
+		"outputs": [
 			{
 				"name": "",
 				"type": "string"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [],
-			"name": "activate",
-			"outputs": [],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "activate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "_player",
 				"type": "address"
 			}
-			],
-			"name": "getWinVaults",
-			"outputs": [
+		],
+		"name": "getWinVaults",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [],
-			"name": "withdraw",
-			"outputs": [],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "",
 				"type": "address"
@@ -1173,9 +1173,9 @@ module.exports = {
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"name": "plyrRnds_",
-			"outputs": [
+		],
+		"name": "plyrRnds_",
+		"outputs": [
 			{
 				"name": "eth",
 				"type": "uint256"
@@ -1192,30 +1192,30 @@ module.exports = {
 				"name": "closed",
 				"type": "bool"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "rID_",
-			"outputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "rID_",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "getCurrentRoundInfo",
-			"outputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getCurrentRoundInfo",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
@@ -1256,70 +1256,70 @@ module.exports = {
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "symbol",
-			"outputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "symbol",
+		"outputs": [
 			{
 				"name": "",
 				"type": "string"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "_player",
 				"type": "address"
 			}
-			],
-			"name": "getPlayerAffValue",
-			"outputs": [
+		],
+		"name": "getPlayerAffValue",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256[13]"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [],
-			"name": "buy",
-			"outputs": [],
-			"payable": true,
-			"stateMutability": "payable",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "getTimeLeft",
-			"outputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "buy",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getTimeLeft",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "_rID",
 				"type": "uint256"
@@ -1328,28 +1328,28 @@ module.exports = {
 				"name": "_eth",
 				"type": "uint256"
 			}
-			],
-			"name": "calcKeysReceived",
-			"outputs": [
+		],
+		"name": "calcKeysReceived",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "_keys",
 				"type": "uint256"
 			}
-			],
-			"name": "iWantXKeys",
-			"outputs": [
+		],
+		"name": "iWantXKeys",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
@@ -1358,59 +1358,82 @@ module.exports = {
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "_player",
 				"type": "address"
 			}
-			],
-			"name": "getPlayerEffectiveValue",
-			"outputs": [
+		],
+		"name": "getPlayerEffectiveValue",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "_keys",
 				"type": "uint256"
+			},
+			{
+				"name": "_balance",
+				"type": "uint256"
 			}
-			],
-			"name": "isBuyable",
-			"outputs": [
+		],
+		"name": "isReloadable",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint8"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_keys",
+				"type": "uint256"
+			}
+		],
+		"name": "isBuyable",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint8"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
 			{
 				"name": "_player",
 				"type": "address"
 			}
-			],
-			"name": "getPlayerInfoByAddress",
-			"outputs": [
+		],
+		"name": "getPlayerInfoByAddress",
+		"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
@@ -1435,25 +1458,25 @@ module.exports = {
 				"name": "",
 				"type": "uint256"
 			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"inputs": [],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "constructor"
-		},
-		{
-			"payable": true,
-			"stateMutability": "payable",
-			"type": "fallback"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
 			{
 				"indexed": true,
 				"name": "rID",
@@ -1474,13 +1497,13 @@ module.exports = {
 				"name": "next",
 				"type": "uint256"
 			}
-			],
-			"name": "LogTimeEndRound",
-			"type": "event"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
+		],
+		"name": "LogTimeEndRound",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
 			{
 				"indexed": true,
 				"name": "rID",
@@ -1501,13 +1524,13 @@ module.exports = {
 				"name": "next",
 				"type": "uint256"
 			}
-			],
-			"name": "LogQuantityEndRound",
-			"type": "event"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
+		],
+		"name": "LogQuantityEndRound",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
 			{
 				"indexed": true,
 				"name": "rID",
@@ -1533,13 +1556,13 @@ module.exports = {
 				"name": "next",
 				"type": "uint256"
 			}
-			],
-			"name": "LogQuantityAward",
-			"type": "event"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
+		],
+		"name": "LogQuantityAward",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
 			{
 				"indexed": false,
 				"name": "rID",
@@ -1570,13 +1593,13 @@ module.exports = {
 				"name": "time",
 				"type": "uint256"
 			}
-			],
-			"name": "LogBuy",
-			"type": "event"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
+		],
+		"name": "LogBuy",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
 			{
 				"indexed": true,
 				"name": "player",
@@ -1592,13 +1615,13 @@ module.exports = {
 				"name": "time",
 				"type": "uint256"
 			}
-			],
-			"name": "LogWithdraw",
-			"type": "event"
-		},
-		{
-			"anonymous": false,
-			"inputs": [
+		],
+		"name": "LogWithdraw",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
 			{
 				"indexed": true,
 				"name": "AirdropRound",
@@ -1619,10 +1642,10 @@ module.exports = {
 				"name": "time",
 				"type": "uint256"
 			}
-			],
-			"name": "LogAirdrop",
-			"type": "event"
-		}
-		]
+		],
+		"name": "LogAirdrop",
+		"type": "event"
+	}
+]
 	}
 }

@@ -40,7 +40,7 @@
 			<button class={ ui:true,button:true,fluid:true,'btn-send':true,loading:purchasing,graceButton:true } onclick={ purchase } data-translate="send_eth">ETH사용</button>
 		</div>
 		<div class="eight wide computer eight wide tablet sixteen wide mobile column">
-			<button class="ui blue basic button fluid" onclick={ reverse }>
+			<button class={ui:true,blue:true,basic:true,button:true,fluid:true,loading:reversing} onclick={ reverse }>
 				<span data-translate="reverse">보너스 사용</span>
 			</button>
 		</div>
@@ -87,7 +87,7 @@
 			</div>
 		</div>
 		<div class="actions">
-			<div class="ui green button" id="reverse" data-translate="reverse" onclick={ reverseHandler }>提现</div>
+			<div class="ui green button loading" id="reverse" data-translate="reverse" onclick={ reverseHandler }>提现</div>
 			<div class="ui cancel red button" data-translate="cancel">取消</div>
 		</div>
 	</div>
@@ -103,8 +103,10 @@
 	_this.TMXprice = BN(0)
 	_this.calcedEth = BN(0)
 	_this.calcedTMX = BN(0)
+	_this.ethsCanWithdraw = BN(0)
 	_this.calcing = false
 	_this.purchasing = false
+	_this.reversing = false
 	_this.TMXs = 0
 	_this.operateCount = 0
 	_this.delayQueryEthTimeId = 0
@@ -124,6 +126,23 @@
 			_this.reCalcETHandTMX()
 		}, 1000)
 	}
+	Interface.UI.on('currentPlayerInfo',function(playerInfo){
+		var keysBuyed = playerInfo.keysBuyed.dividedBy(1e18)
+		var dividend = playerInfo.dividend.dividedBy(1e18)
+		var fallback = playerInfo.fallback.dividedBy(1e18)
+		var ethDeployed = playerInfo.ethDeployed.dividedBy(1e18)
+		var invite_feedback = playerInfo.invite_feedback.dividedBy(1e18)
+		var persionBank = playerInfo.persionBank.dividedBy(1e18)
+		var escapeFromThree = (ethDeployed.multipliedBy(3).minus(invite_feedback.plus(dividend)))
+		if(!escapeFromThree.isGreaterThan(BN(0)) && keysBuyed.isGreaterThan(BN(0))){
+			_this.ethsCanWithdraw = BN(3).plus(fallback).plus(persionBank)
+		}else if(keysBuyed.isEqualTo(BN(0))){
+			_this.ethsCanWithdraw = dividend.plus(invite_feedback).plus(fallback).plus(persionBank)
+		}else {
+			_this.ethsCanWithdraw = dividend.plus(invite_feedback).plus(fallback).plus(persionBank)
+		}
+
+	})
 	_this.more10Key = function(){
 		_this.keys += 10
 		$('#amount').val(_this.keysFilter())
@@ -154,84 +173,6 @@
 		$('.notTheTime.modal').modal('show')
 	}
 	_this.purchase = function(){
-		// 前端购买冗余逻辑
-		// function processPurchase(){
-		// 	Interface.Bridges.Metamask.contracts.LuckyStars.write('buy',[],undefined,{value:currentPurchasEth.multipliedBy(_this.fullUnit).toFixed(0).toString() }).then(function(){
-		// 		_this.purchasing = false
-		// 		Interface.UI.trigger('confirmPurchas')
-		// 	},function(){
-		// 		Interface.UI.trigger('cancelPurchas')
-		// 		_this.purchasing = false
-		// 	})
-		// }
-		// function initPurchase(){
-		// 	var allowance,balance,TMXToDestory = currentPurchasTMX
-		// 	return Promise.all([_this.getAllowance(),_this.getBalanceOfMe()]).then(function(data){
-		// 		allowance = BN(data[0])
-		// 		balance = BN(data[1])
-		// 		return new Promise(function(res,rej){
-		// 			res({
-		// 				allowance:allowance,
-		// 				balance:balance,
-		// 				TMXToDestory:TMXToDestory
-		// 			})
-		// 		})
-		// 	},function(err){
-		// 		Interface.UI.trigger('GraceError',err)
-		// 	})
-		// }
-		// var currentPurchasEth,currentPurchasTMX
-		// if(_this.purchasing){
-		// 	$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
-		// 	$('.ui.modal.tiny.Public .content p').text($.i18n.map.process_purchasing)
-		// 	$('.ui.modal.tiny.Public').modal('show')
-		// 	return
-		// }
-		// _this.purchasing = true
-		
-		// if(_this.calcing){
-		// 	_this.purchasing = false
-		// 	return
-		// }
-		// if(!Interface.Cache.isRegistered){
-		// 	$('.ui.modal.tiny.Public .header').text($.i18n.map.welcome)
-		// 	$('.ui.modal.tiny.Public .content p').text($.i18n.map.please_register)
-		// 	$('.ui.modal.tiny.Public').modal('show')
-		// 	_this.purchasing = false
-		// 	return
-		// }
-		
-		// _this.reCalcETHandTMX(function(err){
-		// 	if(err){
-		// 		return
-		// 	}
-		// 	currentPurchasEth = _this.calcedEth
-		// 	currentPurchasTMX = _this.calcedTMX
-		// 	if(currentPurchasEth.isLessThan(BN('0.1')) || currentPurchasEth.isGreaterThan(BN("30"))){
-		// 		$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
-		// 		$('.ui.modal.tiny.Public .content p').text($.i18n.map.purchas_limit)
-		// 		$('.ui.modal.tiny.Public').modal('show')
-		// 		_this.purchasing = false
-		// 		return
-		// 	}		
-		// 	initPurchase().then(function(data){
-		// 		if(data.balance.dividedBy(1e18).isLessThan(data.TMXToDestory)){
-		// 			$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
-		// 			$('.ui.modal.tiny.Public .content p').text($.i18n.map.tmxNotEnough)
-		// 			$('.ui.modal.tiny.Public').modal('show')
-		// 			_this.purchasing = false
-		// 			return
-		// 		}else if(data.allowance.dividedBy(1e18).isLessThan(data.TMXToDestory)){
-		// 			_this.newApprove().then(function(){
-		// 				processPurchase()
-		// 			},function(){
-
-		// 			})
-		// 		}else {
-		// 			processPurchase()
-		// 		}
-		// 	})
-		// })
 		var currentPurchasEth
 		function validatePurchas(){
 			return Interface.Bridges.Metamask.contracts.LuckyStars.read('isBuyable',[BN(_this.keys).multipliedBy(1e18).toString()]).then(function(data){ 
@@ -250,11 +191,11 @@
 			})
 		}
 		if(_this.purchasing){
-		 	$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
-		 	$('.ui.modal.tiny.Public .content p').text($.i18n.map.process_purchasing)
-		 	$('.ui.modal.tiny.Public').modal('show')
-		 	return
-		 }
+			$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+			$('.ui.modal.tiny.Public .content p').text($.i18n.map.process_purchasing)
+			$('.ui.modal.tiny.Public').modal('show')
+			return
+		}
 		_this.purchasing = true
 		
 		if(_this.calcing){
@@ -335,18 +276,90 @@
 		})
 
 	}
-	_this.reverse = function(){
-		$('.ui.tiny.modal.reverse').modal('show')
-	}
-	_this.reverseHandler = function(e){
-		var reverseAmount = (BN(parseFloat($('.reverseAmount').val())).multipliedBy(_this.fullUnit)).toString()
-		Interface.Bridges.Metamask.contracts.LuckyStars.write('reLoadBuy',[reverseAmount]).then(function(){
-			$('.ui.tiny.modal.reverse').modal('hide')
-		},function(){
-			$('.ui.tiny.modal.reverse').modal('hide')
+	_this.reverse = function(e){
+		if(_this.reversing){
+			$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+			$('.ui.modal.tiny.Public .content p').text($.i18n.map.process_purchasing)
+			$('.ui.modal.tiny.Public').modal('show')
+			return
+		}
+		_this.reversing = true
+		var currentPurchasEth
+		_this.reCalcETHandTMX(function(err){
+			if(err){
+				_this.reversing = false
+				return
+			}
+			currentPurchasEth = _this.calcedEth
+			_this.reverseValidate().then(function(signal){
+				switch(signal){
+					case 1:
+					_this.reverseUseAmount(currentPurchasEth.multipliedBy(1e18))
+					break;
+					case 2:
+					case 4:
+					_this.newApprove().then(function(){
+						_this.reverseUseAmount(currentPurchasEth.multipliedBy(1e18))
+					},function(){
+						_this.reversing = false
+					})
+					return
+					break;
+					case 3:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.tmxNotEnough)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.reversing = false
+					return
+					break;
+					case 6:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.gameNotReady)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.reversing = false
+					return
+					break;
+					case 7:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.purchas_limit)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.reversing = false
+					return
+					break;
+					case 8:
+					$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
+					$('.ui.modal.tiny.Public .content p').text($.i18n.map.ethNotEnought)
+					$('.ui.modal.tiny.Public').modal('show')
+					_this.reversing = false
+					return
+					break;
+				}
+			},function(){
+				_this.reversing = false
+			})
+
 		})
+		
+
+		
 	}
 	// 方法
+	_this.reverseValidate = function(){
+		console.log(BN(_this.keys).multipliedBy(1e18).toString(),_this.ethsCanWithdraw.multipliedBy(1e18).toString())
+		return Interface.Bridges.Metamask.contracts.LuckyStars.read('isReloadable',[BN(_this.keys).multipliedBy(1e18).toString(),_this.ethsCanWithdraw.multipliedBy(1e18).toString()]).then(function(data){
+			return Promise.resolve(data.toNumber())
+		},function(){
+			Interface.UI.trigger('GraceError',$.i18n.map.networkCash)
+			return Promise.reject()
+		})
+	}
+	_this.reverseUseAmount = function(reverseAmount){
+		Interface.Bridges.Metamask.contracts.LuckyStars.write('reLoadBuy',[reverseAmount.toString()]).then(function(){
+			_this.reversing = false
+		},function(){
+			_this.reversing = false
+		})
+	}
 	_this.keysFilter = function(){
 		if(_this.keys > 1){
 			return _this.keys + ' Keys'
@@ -356,13 +369,15 @@
 		
 	}
 	_this.newApprove = function(){
-		return Interface.Bridges.Metamask.contracts.TMX.write('approve',[Interface.Bridges.Metamask.contracts.Payment.API.address,1e23.toString()]).then(_this.processApprove)
+		return Interface.Bridges.Metamask.contracts.TMX.write('approve',[Interface.Bridges.Metamask.contracts.Payment.API.address,1e23.toString()]).then(_this.processApprove,function(){
+			Promise.reject()
+		})
 	}
 	_this.processApprove = function(){
 		return new Promise(function(res,rej){
 			function validateAllowance(){
 				_this.getAllowance().then(function(data){
-					if((BN(data)).isEqualTo(1e23)){
+					if((BN(data)).isGreaterThanOrEqualTo(1e23)){
 						res(true)
 					}else {
 						validateAllowance()
