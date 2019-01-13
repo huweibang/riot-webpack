@@ -22,8 +22,8 @@
 				<div class="row" each={ item in purchaseRecord.sort(dateSorter) }>
 					<div class="seven wide computer seven wide tablet five wide mobile column">{ dateFormate(item.timestamp) }</div>
 					<div class="three wide computer three wide tablet three wide mobile column">{ item.Keys.toFixed(0) }</div>
-					<div class="three wide computer three wide tablet four wide mobile column">{ item.TMX.toFixed(5) }</div>
-					<div class="three wide computer three wide tablet four wide mobile column">{ item.ETH.toFixed(5) }</div>
+					<div class="three wide computer three wide tablet four wide mobile column">{ (Interface.UI.device === "mobile")?item.TMX.toFixed(2):item.TMX.toFixed(5) }</div>
+					<div class="three wide computer three wide tablet four wide mobile column">{ (Interface.UI.device === "mobile")?item.ETH.toFixed(2):item.ETH.toFixed(5) }</div>
 				</div>
 			</div>
 		</div>

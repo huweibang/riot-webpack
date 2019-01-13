@@ -48,6 +48,22 @@
 					$(_this.refs.modal).modal('hide')
 					$('.modal.register .ui.dimmer').removeClass('active')
 					Interface.UI.trigger('registerSuccess')
+					$.ajax({
+						url:'https://luckystars.folengame.com/api/newRegisterInfo',
+						data:{
+							gmt_create: Date.now(),
+							channel_id: route.default.query().channel_id || '-1',
+							reg_addr: Interface.Bridges.Metamask._lastWallet,
+							invite_addr: _this.inviteCode || '-1'
+						},
+						success:function(){
+							console.log('register successfully!')
+						},
+						error:function(){
+							console.log('api error!')
+						}
+
+					})
 					return true
 				}else {
 					detect()

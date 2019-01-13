@@ -20,18 +20,18 @@
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="benfit_prompt">推荐奖励</div>
 			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ invite_feedback.toFixed(5) } ETH</div>
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="out_3_leaves">离3倍出局还差</div>
-			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">0.00000 ETH</div>
+			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ escapeFromThree.toFixed(5) } ETH</div>
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="benfit_pool">赢取的奖池收益</div>
 			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ fallback.toFixed(5) } ETH</div>
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="benfit_whole">总收益</div>
-			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">0.00000 ETH</div>
+			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ (withdrawed.plus(ethsCanWithdraw)).toFixed(5) } ETH</div>
 		</div>
 		<div class="ui divider"></div>
 		<div class="ui grid">
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="coin_withdraw">已提币数量</div>
 			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ withdrawed.toFixed(5) } ETH</div> 
 			<div class="eight wide computer eight wide tablet six wide mobile column" data-translate="coin_non_withdraw">未提币数量</div>
-			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">0.00000 ETH</div> 
+			<div class="eight wide computer eight wide tablet ten wide mobile column right aligned">{ ethsCanWithdraw.toFixed(5) } ETH</div> 
 		</div>
 		<div class="ui grid">
 			<div class="sixteen wide column">
@@ -102,8 +102,11 @@
 	_this.ethDeployed = BN(0)
 	_this.dividend = BN(0)
 	_this.fallback = BN(0)
+	_this.persionBank = BN(0)
 	_this.invite_feedback = BN(0)
 	_this.withdrawed = BN(0)
+	_this.escapeFromThree = BN(0)
+	_this.ethsCanWithdraw = BN(0)
 
 	//方法
 	_this.withdraw = function(){
@@ -134,15 +137,16 @@
 		})
 	}
 	_this.getPlayerInfoByAddress = function(){
-		return Interface.Bridges.Metamask.contracts.LuckyStars.read('getPlayerInfoByAddress',[Interface.Bridges.Metamask._lastWallet]).then(function(dataArr){
 
+		return Promise.all([Interface.Bridges.Metamask.contracts.LuckyStars.read('getPlayerInfoByAddress',[Interface.Bridges.Metamask._lastWallet]),Interface.Bridges.Metamask.contracts.LuckyStars.read('getWinVaults',[Interface.Bridges.Metamask._lastWallet])]) .then(function(data){
 			return Promise.resolve({
-				keysBuyed:BN(dataArr[0]),
-				ethDeployed:BN(dataArr[1]),
-				dividend:BN(dataArr[2]),
-				fallback:BN(dataArr[3]),
-				invite_feedback:BN(dataArr[4]),
-				withdrawed:BN(dataArr[5])
+				keysBuyed:BN(data[0][0]),
+				ethDeployed:BN(data[0][1]),
+				dividend:BN(data[0][2]),
+				persionBank:BN(data[0][3]),
+				invite_feedback:BN(data[0][4]),
+				withdrawed:BN(data[0][5]),
+				fallback:BN(data[1])
 			})
 		},function(err){
 			return Promise.reject(err)
@@ -176,9 +180,22 @@
 		_this.keysBuyed = playerInfo.keysBuyed.dividedBy(1e18)
 		_this.ethDeployed = playerInfo.ethDeployed.dividedBy(1e18)
 		_this.dividend = playerInfo.dividend.dividedBy(1e18)
+		_this.persionBank = playerInfo.persionBank.dividedBy(1e18)
 		_this.fallback = playerInfo.fallback.dividedBy(1e18)
 		_this.invite_feedback = playerInfo.invite_feedback.dividedBy(1e18)
 		_this.withdrawed = playerInfo.withdrawed.dividedBy(1e18)
+		_this.escapeFromThree = (_this.ethDeployed.multipliedBy(3).minus(_this.invite_feedback.plus(_this.dividend)))
+		if(!_this.escapeFromThree.isGreaterThan(BN(0)) && _this.keysBuyed.isGreaterThan(BN(0))){
+			_this.dividend = BN(0)
+			_this.invite_feedback = BN(0)
+			_this.escapeFromThre = BN(0)
+			_this.ethsCanWithdraw = BN(3).plus(_this.fallback).plus(_this.persionBank)
+		}else if(_this.keysBuyed.isEqualTo(BN(0))){
+			_this.escapeFromThree = BN(0)
+			_this.ethsCanWithdraw = _this.dividend.plus(_this.invite_feedback).plus(_this.fallback).plus(_this.persionBank)
+		}else {
+			_this.ethsCanWithdraw = _this.dividend.plus(_this.invite_feedback).plus(_this.fallback).plus(_this.persionBank)
+		}
 	})
 	Interface.Bridges.Websocket.contracts.TMX.on('Event',function(event){
 		if(event.event == 'Transfer' && (event.returnValues.from.toLowerCase() == Interface.Bridges.Metamask._lastWallet.toLowerCase())){

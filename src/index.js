@@ -89,21 +89,22 @@ $(async function(){
 		}
 		]
 	})
-	if(!Interface.Bridges.Metamask){
-		$('.envError .content').text('No metamask or trustwallet detected!')
-		$('.envError.ui.tiny.modal').modal({
-			closable:false
-		}).modal('show')
-		return
-	}
-	var isNet = await Interface.checkNetwork()
-	if(!isNet){
-		$('.envError .content').text('You\'re not on the right network!')
-		$('.envError.ui.tiny.modal').modal({
-			closable:false
-		}).modal('show')
-		return
-	}
+	// if(!Interface.Bridges.Metamask){
+	// 	$('.envError .content').text('No metamask or trustwallet detected!')
+	// 	$('.envError.ui.tiny.modal').modal({
+	// 		closable:false
+	// 	}).modal('show')
+	// 	return
+	// }
+	// var isNet = await Interface.checkNetwork()
+	// if(!isNet){
+	// 	$('.envError .content').text('You\'re not on the right network!')
+	// 	$('.envError.ui.tiny.modal').modal({
+	// 		closable:false
+	// 	}).modal('show')
+	// 	return
+	// }
+
 	// 监听 web3 websocket事件
 	await Interface.Bridges.Websocket.contracts.Register.listen()
 	await Interface.Bridges.Websocket.contracts.TMX.listen()
@@ -136,6 +137,13 @@ $(async function(){
 			className: "my-toast"
 		}).showToast();
 	}
+	setInterval(async function(){
+		var isConnecting = await Interface.Bridges.Websocket.web3.eth.net.isListening()
+		if(!isConnecting){
+			toastHandler($.i18n.map.networkError,'#db2828')
+			Interface.UI.trigger('ConnectError')
+		}
+	},3000)
 	Interface.Bridges.Websocket.contracts.LuckyStars.on('Event',function(event){
 		var winner = event.returnValues.winner
 		var player = event.returnValues.player
@@ -182,9 +190,9 @@ $(async function(){
 			case 'LogWithdraw':
 			Interface.UI.trigger('Withdraw',isMe,player,BN(event.returnValues.eth).dividedBy(1e18))
 			if(isMe){
-				toastHandler($.i18n.map.withdraw_me.replace('{0}',BN(event.returnValues.eth).dividedBy(1e18).toFixed(1)),"linear-gradient(to right, orange ,yellow)")
+				toastHandler($.i18n.map.withdraw_me.replace('{0}',BN(event.returnValues.eth).dividedBy(1e18).toFixed(5)),"linear-gradient(to right, orange ,yellow)")
 			}else {
-				toastHandler($.i18n.map.withdraw.replace('{0}',player).replace('{1}',BN(event.returnValues.eth).dividedBy(1e18).toFixed(1)),"linear-gradient(to right, orange ,yellow)")
+				// toastHandler($.i18n.map.withdraw.replace('{0}',player).replace('{1}',BN(event.returnValues.eth).dividedBy(1e18).toFixed(1)),"linear-gradient(to right, orange ,yellow)")
 			}
 			break;
 		}

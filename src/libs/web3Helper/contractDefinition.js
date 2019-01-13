@@ -1081,47 +1081,24 @@ module.exports = {
 	},
 	LuckyStars:{
 		name:'LuckyStars',
-		address:"0x5fd3b23bfc000d6e1c54ff1e7876bead0fb4af54",
+		address:"0x584c33a9245a808e537fa46f3e39b4146970de73",
 		ABI:[
 		{
-			"constant": true,
+			"constant": false,
 			"inputs": [],
-			"name": "getBuyPrice",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
+			"name": "activate",
+			"outputs": [],
 			"payable": false,
-			"stateMutability": "view",
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"name": "rque_",
-			"outputs": [
-			{
-				"name": "plynum",
-				"type": "uint256"
-			},
-			{
-				"name": "off20",
-				"type": "uint256"
-			},
-			{
-				"name": "off50",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
+			"constant": false,
+			"inputs": [],
+			"name": "buy",
+			"outputs": [],
+			"payable": true,
+			"stateMutability": "payable",
 			"type": "function"
 		},
 		{
@@ -1139,529 +1116,12 @@ module.exports = {
 			"type": "function"
 		},
 		{
-			"constant": true,
-			"inputs": [],
-			"name": "name",
-			"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [],
-			"name": "activate",
-			"outputs": [],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"name": "round_",
-			"outputs": [
-			{
-				"name": "plyr",
-				"type": "address"
-			},
-			{
-				"name": "strt",
-				"type": "uint256"
-			},
-			{
-				"name": "end",
-				"type": "uint256"
-			},
-			{
-				"name": "ended",
-				"type": "bool"
-			},
-			{
-				"name": "keys",
-				"type": "uint256"
-			},
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "pot",
-				"type": "uint256"
-			},
-			{
-				"name": "mask",
-				"type": "uint256"
-			},
-			{
-				"name": "phase",
-				"type": "uint256"
-			},
-			{
-				"name": "award",
-				"type": "uint256"
-			},
-			{
-				"name": "tmx",
-				"type": "uint256"
-			},
-			{
-				"name": "pothst",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"name": "awrdIn_",
-			"outputs": [
-			{
-				"name": "off20",
-				"type": "uint256"
-			},
-			{
-				"name": "off50",
-				"type": "uint256"
-			},
-			{
-				"name": "winner",
-				"type": "uint256"
-			},
-			{
-				"name": "pot",
-				"type": "uint256"
-			},
-			{
-				"name": "ended",
-				"type": "bool"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_player",
-				"type": "address"
-			}
-			],
-			"name": "getWinVaults",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
 			"constant": false,
 			"inputs": [],
 			"name": "withdraw",
 			"outputs": [],
 			"payable": false,
 			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"name": "plyrRnds_",
-			"outputs": [
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "keys",
-				"type": "uint256"
-			},
-			{
-				"name": "mask",
-				"type": "uint256"
-			},
-			{
-				"name": "closed",
-				"type": "bool"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "rID_",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "getCurrentRoundInfo",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "aID_",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "symbol",
-			"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_player",
-				"type": "address"
-			}
-			],
-			"name": "getPlayerAffValue",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256[13]"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [],
-			"name": "buy",
-			"outputs": [],
-			"payable": true,
-			"stateMutability": "payable",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-			],
-			"name": "plyr_",
-			"outputs": [
-			{
-				"name": "win",
-				"type": "uint256"
-			},
-			{
-				"name": "gen",
-				"type": "uint256"
-			},
-			{
-				"name": "aff",
-				"type": "uint256"
-			},
-			{
-				"name": "bon",
-				"type": "uint256"
-			},
-			{
-				"name": "bnk",
-				"type": "uint256"
-			},
-			{
-				"name": "lrnd",
-				"type": "uint256"
-			},
-			{
-				"name": "lphs",
-				"type": "uint256"
-			},
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "withdraw",
-				"type": "uint256"
-			},
-			{
-				"name": "dref",
-				"type": "address"
-			},
-			{
-				"name": "dinv",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "getTimeLeft",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_rID",
-				"type": "uint256"
-			},
-			{
-				"name": "_eth",
-				"type": "uint256"
-			}
-			],
-			"name": "calcKeysReceived",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_keys",
-				"type": "uint256"
-			}
-			],
-			"name": "iWantXKeys",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "airDropPot_",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_keys",
-				"type": "uint256"
-			}
-			],
-			"name": "isBuyable",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint8"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "_player",
-				"type": "address"
-			}
-			],
-			"name": "getPlayerInfoByAddress",
-			"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-			],
-			"name": "airIn_",
-			"outputs": [
-			{
-				"name": "win",
-				"type": "uint256"
-			},
-			{
-				"name": "addr",
-				"type": "uint256"
-			},
-			{
-				"name": "time",
-				"type": "uint256"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -1846,6 +1306,317 @@ module.exports = {
 			],
 			"name": "LogAirdrop",
 			"type": "event"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "aID_",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_rID",
+				"type": "uint256"
+			},
+			{
+				"name": "_eth",
+				"type": "uint256"
+			}
+			],
+			"name": "calcKeysReceived",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getBuyPrice",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getCurrentRoundInfo",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_player",
+				"type": "address"
+			}
+			],
+			"name": "getPlayerAffValue",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256[13]"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_player",
+				"type": "address"
+			}
+			],
+			"name": "getPlayerInfoByAddress",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getTimeLeft",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_player",
+				"type": "address"
+			}
+			],
+			"name": "getWinVaults",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_keys",
+				"type": "uint256"
+			}
+			],
+			"name": "isBuyable",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint8"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "_keys",
+				"type": "uint256"
+			}
+			],
+			"name": "iWantXKeys",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "name",
+			"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"name": "plyrRnds_",
+			"outputs": [
+			{
+				"name": "eth",
+				"type": "uint256"
+			},
+			{
+				"name": "keys",
+				"type": "uint256"
+			},
+			{
+				"name": "mask",
+				"type": "uint256"
+			},
+			{
+				"name": "closed",
+				"type": "bool"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "rID_",
+			"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "symbol",
+			"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		}
 		]
 	}

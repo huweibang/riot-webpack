@@ -2,7 +2,7 @@
 <liangkai>
 	<div class="ui segment">
 		<i class="ui icon cubes massive backicon"></i>
-		<h4 class="ui header"><span data-translate="liangkai">에너지 단계</span> - { currentStage.toNumber() }<i class="question circle outline icon"></i></h4>
+		<h4 class="ui header"><span data-translate="liangkai">에너지 단계</span><i class="question circle outline icon"></i></h4>
 		<div class="bordergroup one"></div>
 		<div class="bordergroup two"></div>
 		<p class="tips" data-translate="pool_whole">상금풀 현재총량</p>
@@ -149,6 +149,12 @@ liangkai .content span.reward-pool{
 }
 liangkai .content .icon {
 	vertical-align: middle;
+}
+.currentStage {
+	font-size: 4rem;
+	position: absolute;
+	right: 1.5rem;
+	top: 1.5rem;
 }
 .ui.segment {
 	color: #caccf7;
