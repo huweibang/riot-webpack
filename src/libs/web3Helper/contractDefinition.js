@@ -1081,7 +1081,7 @@ module.exports = {
 	},
 	LuckyStars:{
 		name:'LuckyStars',
-		address:"0x58a91e837d5d3d681b158e34b53e58cacb8bad6b",
+		address:"0x5a8283bb92f8efe97ed5fe032352ccf78802c9e3",
 		ABI:[
 	{
 		"constant": true,

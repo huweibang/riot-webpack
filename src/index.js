@@ -89,21 +89,21 @@ $(async function(){
 		}
 		]
 	})
-	// if(!Interface.Bridges.Metamask){
-	// 	$('.envError .content').text('No metamask or trustwallet detected!')
-	// 	$('.envError.ui.tiny.modal').modal({
-	// 		closable:false
-	// 	}).modal('show')
-	// 	return
-	// }
-	// var isNet = await Interface.checkNetwork()
-	// if(!isNet){
-	// 	$('.envError .content').text('You\'re not on the right network!')
-	// 	$('.envError.ui.tiny.modal').modal({
-	// 		closable:false
-	// 	}).modal('show')
-	// 	return
-	// }
+	if(!Interface.Bridges.Metamask){
+		$('.envError .content').text('No metamask or trustwallet detected!')
+		$('.envError.ui.tiny.modal').modal({
+			closable:false
+		}).modal('show')
+		return
+	}
+	var isNet = await Interface.checkNetwork()
+	if(!isNet){
+		$('.envError .content').text('You\'re not on the right network!')
+		$('.envError.ui.tiny.modal').modal({
+			closable:false
+		}).modal('show')
+		return
+	}
 
 	// 监听 web3 websocket事件
 	await Interface.Bridges.Websocket.contracts.Register.listen()

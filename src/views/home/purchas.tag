@@ -277,13 +277,19 @@
 
 	}
 	_this.reverse = function(e){
+
 		if(_this.reversing){
 			$('.ui.modal.tiny.Public .header').text($.i18n.map.hint)
 			$('.ui.modal.tiny.Public .content p').text($.i18n.map.process_purchasing)
 			$('.ui.modal.tiny.Public').modal('show')
 			return
 		}
+
 		_this.reversing = true
+		if(_this.calcing){
+			_this.purchasing = false
+			return
+		}
 		var currentPurchasEth
 		_this.reCalcETHandTMX(function(err){
 			if(err){
