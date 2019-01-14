@@ -50,7 +50,7 @@
                 return new Promise((res, rej) => {
                     Interface.Bridges.Metamask.web3.version.getNetwork(function (r, e) {
                         if (r) return rej(r)
-                        if (e == "4") {
+                        if (e == "1") {
 
                             return res(true)
                         } else {

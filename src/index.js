@@ -58,11 +58,11 @@ $(async function(){
 		}, {
 			name: "Browser",
 			// API: "https://rinkeby.infura.io/YKZGQG2QTBx0tiWoB2IF"
-			API: "https://rinkeby.infura.io/YKZGQG2QTBx0tiWoB2IF"
+			API: "https://mainnet.infura.io/YKZGQG2QTBx0tiWoB2IF"
 		}, {
 			name: "Websocket",
 			// API: new Web3(new Web3.providers.WebsocketProvider("wss://rinkeby.infura.io/_ws"))
-			API: new Web3(new Web3.providers.WebsocketProvider("wss://rinkeby.infura.io/_ws"))
+			API: new Web3(new Web3.providers.WebsocketProvider("wss://mainnet.infura.io/_ws"))
 			// API: new Web3(new Web3.providers.WebsocketProvider("ws://192.168.14.86:8546"))
 		}
 		],

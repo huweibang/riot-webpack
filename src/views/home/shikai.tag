@@ -13,7 +13,7 @@
 					<i class="icon stopwatch big"></i>
 				</p>
 				<p style="white-space: nowrap">
-					<span data-translate="pool_leaves">상금풀 누적총량</span> { ethDeployedAmount.toFixed(5) } ETH
+					<span data-translate="pool_leaves">상금풀 누적총량</span> { poolWhole.toFixed(5) } ETH
 				</p>
 
 			</div>
@@ -119,10 +119,10 @@
 		_this.mixin('BNMix')
 		//属性
 		_this.cycle = require('../../imgs/cycle.png')
-		_this.ethDeployedAmount = BN(0)
+		_this.poolWhole = BN(0)
 		//事件
 		Interface.UI.on('currentRoundInfo',function(currentRoundInfo){
-			_this.ethDeployedAmount = currentRoundInfo.ethDeployedAmount.dividedBy(1e18)
+			_this.poolWhole = currentRoundInfo.poolWhole.dividedBy(1e18)
 		})
 		
 		//生命周期

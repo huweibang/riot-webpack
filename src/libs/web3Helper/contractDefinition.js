@@ -2,7 +2,7 @@
 module.exports = {
 	Register:{
 		name:'Register',
-		address:"0x3FB5dB410ed906938c5999218363BF63EF5a9D5A",
+		address:"0xaF9D89438eE121bf963FCE9b48de3D54bfB2D2c8",
 		ABI:[
 		{
 			"constant": true,
@@ -216,41 +216,8 @@ module.exports = {
 	},
 	Payment:{
 		name:'Payment',
-		address:"0x9f6e97958E5E095ADf8741C473D2F5105E286111",
+		address:"0x75Db11BcAa11E1e8AB11cCE7809D9ca7A731279e",
 		ABI:[
-		{
-			"constant": false,
-			"inputs": [
-			{
-				"name": "_stop",
-				"type": "bool"
-			}
-			],
-			"name": "pause",
-			"outputs": [
-			{
-				"name": "success",
-				"type": "bool"
-			}
-			],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [],
-			"name": "terminate",
-			"outputs": [
-			{
-				"name": "success",
-				"type": "bool"
-			}
-			],
-			"payable": false,
-			"stateMutability": "nonpayable",
-			"type": "function"
-		},
 		{
 			"constant": false,
 			"inputs": [
@@ -272,34 +239,6 @@ module.exports = {
 			],
 			"payable": false,
 			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "pause_",
-			"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": true,
-			"inputs": [],
-			"name": "stopFlag_",
-			"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-			],
-			"payable": false,
-			"stateMutability": "view",
 			"type": "function"
 		},
 		{
@@ -577,204 +516,204 @@ module.exports = {
 	},
 	TMX:{
 		name:'TMX',
-		address:"0x9d6f24c15f2774Af9Daf30C7eE35B95Eaa8f75Aa",
+		address:"0x7b02C6118BaeFe500058cfC07D708fb404Ef5bC6",
 		ABI:[
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "mintingFinished",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "mintingFinished",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "bool"
+				"name": "",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "name",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "name",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "string"
+				"name": "",
+				"type": "string"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [
+			"constant": false,
+			"inputs": [
 			{
-				"name":  "_spender",
-				"type":  "address"
+				"name": "_spender",
+				"type": "address"
 			},
 			{
-				"name":  "_value",
-				"type":  "uint256"
+				"name": "_value",
+				"type": "uint256"
 			}
 			],
-			"name":  "approve",
-			"outputs":  [
+			"name": "approve",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "bool"
+				"name": "",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "totalSupply",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "totalSupply",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "uint256"
+				"name": "",
+				"type": "uint256"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [
+			"constant": false,
+			"inputs": [
 			{
-				"name":  "_from",
-				"type":  "address"
+				"name": "_from",
+				"type": "address"
 			},
 			{
-				"name":  "_to",
-				"type":  "address"
+				"name": "_to",
+				"type": "address"
 			},
 			{
-				"name":  "_value",
-				"type":  "uint256"
+				"name": "_value",
+				"type": "uint256"
 			}
 			],
-			"name":  "transferFrom",
-			"outputs":  [
+			"name": "transferFrom",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "bool"
+				"name": "",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "INITIAL_SUPPLY",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "INITIAL_SUPPLY",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "uint256"
+				"name": "",
+				"type": "uint256"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "decimals",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "decimals",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "uint8"
+				"name": "",
+				"type": "uint8"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "MAX_SUPPLY",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "MAX_SUPPLY",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "uint256"
+				"name": "",
+				"type": "uint256"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "cap",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "cap",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "uint256"
+				"name": "",
+				"type": "uint256"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [],
-			"name":  "unpause",
-			"outputs":  [],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"constant": false,
+			"inputs": [],
+			"name": "unpause",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  false,
-			"inputs":  [
+			"constant": false,
+			"inputs": [
 			{
-				"name":  "_to",
-				"type":  "address"
+				"name": "_to",
+				"type": "address"
 			},
 			{
-				"name":  "_amount",
-				"type":  "uint256"
+				"name": "_amount",
+				"type": "uint256"
 			}
 			],
-			"name":  "mint",
-			"outputs":  [
+			"name": "mint",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "bool"
+				"name": "",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "nonpayable",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
 		},
 		{
-			"constant":  true,
-			"inputs":  [],
-			"name":  "paused",
-			"outputs":  [
+			"constant": true,
+			"inputs": [],
+			"name": "paused",
+			"outputs": [
 			{
-				"name":  "",
-				"type":  "bool"
+				"name": "",
+				"type": "bool"
 			}
 			],
-			"payable":  false,
-			"stateMutability":  "view",
-			"type":  "function"
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
 		},
 		{
-			"constant" : false,
+			"constant": false,
 			"inputs": [
 			{
 				"name": "_spender",
@@ -1081,141 +1020,106 @@ module.exports = {
 	},
 	LuckyStars:{
 		name:'LuckyStars',
-		address:"0x5a8283bb92f8efe97ed5fe032352ccf78802c9e3",
+		address:"0x5654c8a885197212c93827fb40001551cdd0a087",
 		ABI:[
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getBuyPrice",
-		"outputs": [
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getBuyPrice",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
 			{
 				"name": "_eth",
 				"type": "uint256"
 			}
-		],
-		"name": "reLoadBuy",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "name",
-		"outputs": [
+			],
+			"name": "reLoadBuy",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "name",
+			"outputs": [
 			{
 				"name": "",
 				"type": "string"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "activate",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "activate",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
 			{
 				"name": "_player",
 				"type": "address"
 			}
-		],
-		"name": "getWinVaults",
-		"outputs": [
+			],
+			"name": "getWinVaults",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "withdraw",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "plyrRnds_",
-		"outputs": [
-			{
-				"name": "eth",
-				"type": "uint256"
-			},
-			{
-				"name": "keys",
-				"type": "uint256"
-			},
-			{
-				"name": "mask",
-				"type": "uint256"
-			},
-			{
-				"name": "closed",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "rID_",
-		"outputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "withdraw",
+			"outputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "rID_",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getCurrentRoundInfo",
-		"outputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getCurrentRoundInfo",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
@@ -1256,70 +1160,70 @@ module.exports = {
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "symbol",
-		"outputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "symbol",
+			"outputs": [
 			{
 				"name": "",
 				"type": "string"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
 			{
 				"name": "_player",
 				"type": "address"
 			}
-		],
-		"name": "getPlayerAffValue",
-		"outputs": [
+			],
+			"name": "getPlayerAffValue",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256[13]"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [],
-		"name": "buy",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "getTimeLeft",
-		"outputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "buy",
+			"outputs": [],
+			"payable": true,
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getTimeLeft",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
 			{
 				"name": "_rID",
 				"type": "uint256"
@@ -1328,28 +1232,28 @@ module.exports = {
 				"name": "_eth",
 				"type": "uint256"
 			}
-		],
-		"name": "calcKeysReceived",
-		"outputs": [
+			],
+			"name": "calcKeysReceived",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
 			{
 				"name": "_keys",
 				"type": "uint256"
 			}
-		],
-		"name": "iWantXKeys",
-		"outputs": [
+			],
+			"name": "iWantXKeys",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
@@ -1358,33 +1262,33 @@ module.exports = {
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
 			{
 				"name": "_player",
 				"type": "address"
 			}
-		],
-		"name": "getPlayerEffectiveValue",
-		"outputs": [
+			],
+			"name": "getPlayerEffectiveValue",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
 			{
 				"name": "_keys",
 				"type": "uint256"
@@ -1393,47 +1297,47 @@ module.exports = {
 				"name": "_balance",
 				"type": "uint256"
 			}
-		],
-		"name": "isReloadable",
-		"outputs": [
+			],
+			"name": "isReloadable",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint8"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
 			{
 				"name": "_keys",
 				"type": "uint256"
 			}
-		],
-		"name": "isBuyable",
-		"outputs": [
+			],
+			"name": "isBuyable",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint8"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
 			{
 				"name": "_player",
 				"type": "address"
 			}
-		],
-		"name": "getPlayerInfoByAddress",
-		"outputs": [
+			],
+			"name": "getPlayerInfoByAddress",
+			"outputs": [
 			{
 				"name": "",
 				"type": "uint256"
@@ -1458,25 +1362,25 @@ module.exports = {
 				"name": "",
 				"type": "uint256"
 			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "fallback"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "constructor"
+		},
+		{
+			"payable": true,
+			"stateMutability": "payable",
+			"type": "fallback"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
 			{
 				"indexed": true,
 				"name": "rID",
@@ -1497,13 +1401,13 @@ module.exports = {
 				"name": "next",
 				"type": "uint256"
 			}
-		],
-		"name": "LogTimeEndRound",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
+			],
+			"name": "LogTimeEndRound",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
 			{
 				"indexed": true,
 				"name": "rID",
@@ -1524,13 +1428,13 @@ module.exports = {
 				"name": "next",
 				"type": "uint256"
 			}
-		],
-		"name": "LogQuantityEndRound",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
+			],
+			"name": "LogQuantityEndRound",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
 			{
 				"indexed": true,
 				"name": "rID",
@@ -1556,13 +1460,13 @@ module.exports = {
 				"name": "next",
 				"type": "uint256"
 			}
-		],
-		"name": "LogQuantityAward",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
+			],
+			"name": "LogQuantityAward",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
 			{
 				"indexed": false,
 				"name": "rID",
@@ -1593,13 +1497,13 @@ module.exports = {
 				"name": "time",
 				"type": "uint256"
 			}
-		],
-		"name": "LogBuy",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
+			],
+			"name": "LogBuy",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
 			{
 				"indexed": true,
 				"name": "player",
@@ -1615,13 +1519,13 @@ module.exports = {
 				"name": "time",
 				"type": "uint256"
 			}
-		],
-		"name": "LogWithdraw",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
+			],
+			"name": "LogWithdraw",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
 			{
 				"indexed": true,
 				"name": "AirdropRound",
@@ -1642,10 +1546,10 @@ module.exports = {
 				"name": "time",
 				"type": "uint256"
 			}
-		],
-		"name": "LogAirdrop",
-		"type": "event"
-	}
-]
+			],
+			"name": "LogAirdrop",
+			"type": "event"
+		}
+		]
 	}
 }
